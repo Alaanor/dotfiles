@@ -1,0 +1,1 @@
+/home/max/.config/fish/config.fish
