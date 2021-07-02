@@ -1,0 +1,55 @@
+" Base stuff
+set visualbell
+set noerrorbells
+set clipboard+=unnamed
+set commentary
+set so=999
+set relativenumber
+
+" Unmap the illegal key - i dont wanna be a sinner
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
+" Leader key to space
+let mapleader=" "
+
+" Useful binding
+inoremap jj <Esc>
+
+" Control (visual action) jetbrains windows
+nnoremap <Leader>vn :action ActivateProjectToolWindow<CR>
+nnoremap <Leader>vha :action HideAllWindows<CR>
+nnoremap <Leader>vdf :action ToggleDistractionFreeMode<CR>
+nnoremap <Leader>vfs :action ToggleFullScreen<CR>
+nnoremap <Leader>vfz :action ToggleZenMode<CR>
+
+" Go to
+nnoremap <Leader>gd :action GotoDeclaration<CR>
+nnoremap <Leader>gs :action GotoSuperMethod<CR>
+nnoremap <Leader>gi :action GotoImplementation<CR>
+nnoremap <Leader>gb :action JumpToLastChange<CR>
+
+" Naviguation actions
+nnoremap <Leader>ns :action FileStructurePopup<CR>
+
+" extract actions
+nnoremap <Leader>ei :action ExtractInterfaceCR>
+nnoremap <Leader>en :action ExtractClass<CR>
+nnoremap <Leader>em :action ExtractMethod<CR>
+
+" refactor actions
+nnoremap <Leader>rf :action ReformatCode<CR>
+nnoremap <Leader>rl :action Javascript.Linters.EsLint.Fix<CR>
+nnoremap <Leader>ra :action ShowIntentionActions<CR><Esc>
+nnoremap <Leader>re :action RenameElement<CR>
+
+" Plugin
+set surround
+set easymotion
+
+" EasyMotion
+let g:EasyMotion_smartcase = 1
+" map <Leader> <Plug>(easymotion-prefix)
+map <Leader>s <Plug>(easymotion-s2)
