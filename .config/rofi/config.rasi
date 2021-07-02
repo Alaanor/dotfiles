@@ -51,7 +51,7 @@ entry {
 
 #textbox-prompt-colon {
   expand: false;
-  str: "  : :  ";
+  str: "::";
   padding: 16px;
 }
 
