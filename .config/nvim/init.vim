@@ -38,6 +38,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'jiangmiao/auto-pairs'
     Plug 'unblevable/quick-scope'
     Plug 'chrisbra/sudoedit.vim'
+    Plug 'tpope/vim-surround'
 
 call plug#end()
 
