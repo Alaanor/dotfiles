@@ -1,5 +1,6 @@
 # base
 set $mod Mod4
+set $alt Mod1
 
 # terminal
 bindsym $mod+Return exec konsole
@@ -75,8 +76,8 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # i3 control related
-bindsym Mod1+Shift+C reload
-bindsym Mod1+Shift+R restart
+bindsym $mod+Shift+C reload
+bindsym $mod+Shift+R restart
 
 # keyboard layout
 exec setxkbmap ch fr
@@ -110,3 +111,6 @@ bindsym $mod+d exec rofi -show drun
 
 # polybar
 exec --no-startup-id polybar gruv
+
+# screenshot
+bindsym $alt+1 exec flameshot gui
