@@ -13,9 +13,9 @@ label-separator = "  "
 [module/i3]
 type = internal/i3
 
-[module/pulseaudio]
-type = internal/pulseaudio
-sink = @DEFAULT_SINK@
+[module/alsa]
+type = internal/alsa
+master-soundcard = default
 format-volume = <label-volume>
 format-muted = <label-muted>
 format-volume-background = ${colors.aqua}
@@ -24,9 +24,6 @@ format-volume-foreground = ${colors.black}
 format-muted-foreground = ${colors.black}
 label-volume = %{T5}%{T-} %{T1}%percentage%%%{T-}
 label-muted = %{T5}ﳌ%{T-} %{T1}%percentage%%%{T-}
-use-ui-max = false
-interval = 2
-click-right = pavucontrol
 
 [module/date]
 type = internal/date
