@@ -20,3 +20,5 @@ font-0 = FiraCode Nerd Font Mono:size=9.425;2
 modules-left = lf menu rf i3
 modules-center =
 modules-right = la alsa ra space lf date rf
+
+tray = right
