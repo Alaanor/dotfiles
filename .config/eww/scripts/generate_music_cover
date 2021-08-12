@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+tmp_dir="/tmp/spotify"
+tmp_cover_path=$tmp_dir/cover.png
+tmp_current_file=$tmp_dir/current.id
+
+if [ ! -d $tmp_dir ]; then
+	mkdir -p $tmp_dir
+fi
+
+if [ ! -f $tmp_current_file ]; then
+	touch $tmp_current_file
+fi
+
+current_id_in_file=$(<$tmp_current_file)
+current_id_in_metadata=$(playerctl metadata mpris:trackid)
+
+fetch_and_update_cover() {
+  artlink="$(playerctl metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
+  if [ $(playerctl metadata mpris:artUrl) ]; then
+  	curl -s "$artlink" --output $tmp_cover_path;
+ fi
+}
+
+if [ "$current_id_in_file" == "" ] || [ "$current_id_in_file" != "$current_id_in_metadata" ]; then
+  fetch_and_update_cover
+  echo $current_id_in_metadata > $tmp_current_file
+fi
+

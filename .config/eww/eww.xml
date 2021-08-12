@@ -1,0 +1,43 @@
+<eww>
+  <definitions>
+    <def name="player">
+      <box orientation="v" space-evenly="false">
+        <box orientation="h" halign="center" space-evenly="false">
+          <box class="music_cover" style="background-image: url('{{music_cover}}');">{{music_generate_cover}}</box>
+          <box orientation="v" valign="left">
+            <box class="music_title">{{music_title}}</box>
+            <box class="music_artist">{{music_artist}}</box>
+          </box>
+        </box>
+      </box>
+    </def>
+
+    <def name="blur_full">
+      <box orientation="v" space-evenly="true">
+      </box>
+    </def>
+  </definitions>
+  
+  <variables>
+    <script-var name="music_artist" interval="1s">playerctl metadata --format '{{ artist }}'</script-var>
+    <script-var name="music_title" interval="1s">~/.config/eww/scripts/get_music_title</script-var>
+    <script-var name="music_cover" interval="1s">~/.config/eww/scripts/get_music_cover</script-var>
+    <script-var name="music_generate_cover" interval="1s">~/.config/eww/scripts/generate_music_cover</script-var>
+  </variables>
+
+  <windows>
+    <window name="player">
+      <geometry x="1056px" y="308px" width="600px" height="300px"/>
+      <widget>
+        <player/>
+      </widget>
+    </window>
+
+    <window name="blur_full">
+      <geometry x="0px" y="0px" width="100%" height="100%"/>
+      <widget>
+        <blur_full/>
+      </widget>
+    </window>
+  </windows>
+</eww>

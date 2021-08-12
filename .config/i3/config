@@ -28,7 +28,7 @@ bindsym $mod+Shift+$right move right
 
 # spliting
 bindsym $mod+v split v
-# bindsym $mod+h split h
+bindsym $mod+b split h
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -132,6 +132,9 @@ exec --no-startup-id polybar gruv
 # screenshot
 bindsym $alt+1 exec flameshot gui
 
+# picom compositor
+exec --no-startup-id picom --backend glx -b
+
 # audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
@@ -144,3 +147,6 @@ bindsym XF86AudioPrev exec playerctl previous
 exec --no-startup-id /usr/bin/firefox
 exec --no-startup-id /usr/bin/discord
 exec --no-startup-id /usr/bin/spotify
+
+# eww widget
+bindsym $mod+w exec ~/.config/eww/toggle_dashboard
