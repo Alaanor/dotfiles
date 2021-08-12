@@ -13,8 +13,8 @@ label-separator = "  "
 [module/i3]
 type = internal/i3
 
-[module/alsa]
-type = internal/alsa
+[module/pulseaudio]
+type = internal/pulseaudio
 master-soundcard = default
 format-volume = <label-volume>
 format-muted = <label-muted>
