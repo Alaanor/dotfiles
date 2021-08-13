@@ -149,4 +149,5 @@ exec --no-startup-id /usr/bin/discord
 exec --no-startup-id /usr/bin/spotify
 
 # eww widget
+exec --no-startup-id eww daemon
 bindsym $mod+w exec ~/.config/eww/toggle_dashboard
