@@ -6,25 +6,37 @@ window {
   background-color: #282828;
   color: #ebdbb2;
   font-family: FiraCode Nerd Font Mono;
+  border: 3px solid #ebdbb2;
 }
 
 .music_cover {
   background-size: 260px;
-  min-height: 260px;
-  min-width: 260px;
+  min-height: 240px;
+  min-width: 240px;
   margin: 20px;
   border-radius: 10px;
 }
 
 .music_title {
-  min-width: 300px;
-  font-size: 20px;
+  min-width: 280px;
+  font-size: 32px;
   font-weight: bold;
+  margin-top: 50px;
   margin-bottom: 10px;
 }
 
 .music_artist {
-  font-size: 15px;
+  font-size: 22px;
   margin-bottom: 10px;
+}
+
+.crypto_price {
+  font-size: 38px;
+  margin-top: 25px;
+  font-weight: bold;
+}
+
+.crypto_text {
+  font-size: 16px;
 }
 

@@ -4,7 +4,7 @@
       <box orientation="v" space-evenly="false">
         <box orientation="h" halign="center" space-evenly="false">
           <box class="music_cover" style="background-image: url('{{music_cover}}');">{{music_generate_cover}}</box>
-          <box orientation="v" valign="left">
+          <box orientation="v" space-evenly="false">
             <box class="music_title">{{music_title}}</box>
             <box class="music_artist">{{music_artist}}</box>
           </box>
@@ -16,6 +16,28 @@
       <box orientation="v" space-evenly="true">
       </box>
     </def>
+
+    <def name="crypto_btc">
+      <box orientation="v" space-evenly="false">
+        <box class="crypto_price">{{crypto_btc_price}}</box>
+        <box class="crypto_text">XBT-CHF</box>
+      </box>
+    </def>
+
+    <def name="crypto_eth">
+      <box orientation="v" space-evenly="false">
+        <box class="crypto_price">{{crypto_eth_price}}</box>
+        <box class="crypto_text">ETH-CHF</box>
+      </box>
+    </def>
+  
+    <def name="crypto_ada">
+      <box orientation="v" space-evenly="false">
+        <box class="crypto_price">{{crypto_ada_price}}</box>
+        <box class="crypto_text">ADA-CHF</box>
+      </box>
+    </def>
+
   </definitions>
   
   <variables>
@@ -23,21 +45,49 @@
     <script-var name="music_title" interval="1s">~/.config/eww/scripts/get_music_title</script-var>
     <script-var name="music_cover" interval="1s">~/.config/eww/scripts/get_music_cover</script-var>
     <script-var name="music_generate_cover" interval="1s">~/.config/eww/scripts/generate_music_cover</script-var>
+
+    <script-var name="crypto_btc_price" interval="1m">curl -s chf.rate.sx/1btc | xargs printf "%.2f\n"</script-var>
+    <script-var name="crypto_eth_price" interval="1m">curl -s chf.rate.sx/1eth | xargs printf "%.2f\n"</script-var>
+    <script-var name="crypto_ada_price" interval="1m">curl -s chf.rate.sx/1ada | xargs printf "%.2f\n"</script-var>
+    <script-var name="crypto_bnb_price" interval="1m">curl -s chf.rate.sx/1bnb | xargs printf "%.2f\n"</script-var>
+    <script-var name="crypto_dot_price" interval="1m">curl -s chf.rate.sx/1dot | xargs printf "%.2f\n"</script-var>
   </variables>
 
   <windows>
     <window name="player">
-      <geometry x="1056px" y="308px" width="600px" height="300px"/>
+      <geometry x="1110" y="420" width="580" height="280"/>
       <widget>
         <player/>
       </widget>
     </window>
 
     <window name="blur_full">
-      <geometry x="0px" y="0px" width="100%" height="100%"/>
+      <geometry x="0" y="0" width="100%" height="100%"/>
       <widget>
         <blur_full/>
       </widget>
     </window>
+
+    <window name="crypto_btc">
+      <geometry x="810" y="420" width="280" height="130"/>
+      <widget>
+        <crypto_btc/>
+      </widget>
+    </window>
+
+    <window name="crypto_eth">
+      <geometry x="810" y="570" width="280" height="130"/>
+      <widget>
+        <crypto_eth/>
+      </widget>
+    </window>
+
+    <window name="crypto_ada">
+      <geometry x="810" y="720" width="280" height="130"/>
+      <widget>
+        <crypto_ada/>
+      </widget>
+    </window>
+
   </windows>
 </eww>
