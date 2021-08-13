@@ -52,6 +52,29 @@
       </box>
     </def>
 
+    <def name="workspaces">
+      <box orientation="h">
+        <box orientation="v">
+          <label class="screen-label" text=""/>
+          <label class="w-{{workspace_1}}" text="{{ if workspace_1 == 1 then '' else '' }}"/>
+          <label class="w-{{workspace_4}}" text="{{ if workspace_4 == 1 then '' else '' }}"/>
+          <label class="w-{{workspace_7}}" text="{{ if workspace_7 == 1 then '' else '' }}"/>
+        </box>
+        <box orientation="v">
+          <label class="screen-label" text=""/>
+          <label class="w-{{workspace_2}}" text="{{ if workspace_2 == 1 then '' else '' }}"/>
+          <label class="w-{{workspace_5}}" text="{{ if workspace_5 == 1 then '' else '' }}"/>
+          <label class="w-{{workspace_8}}" text="{{ if workspace_8 == 1 then '' else '' }}"/>
+        </box>
+        <box orientation="v">
+          <label class="screen-label" text=""/>
+          <label class="w-{{workspace_3}}" text="{{ if workspace_3 == 1 then '' else '' }}"/>
+          <label class="w-{{workspace_6}}" text="{{ if workspace_6 == 1 then '' else '' }}"/>
+          <label class="w-{{workspace_9}}" text="{{ if workspace_9 == 1 then '' else '' }}"/>
+        </box>
+      </box>
+    </def>
+
   </definitions>
   
   <variables>
@@ -70,6 +93,16 @@
     <script-var name="time" interval="1s">date "+%H:%M:%S"</script-var>
 
     <script-var name="current_volume" interval="1s">pamixer --get-volume</script-var>
+
+    <script-var name="workspace_1" interval="1s">i3-workspace-list --num 1 | wc -l</script-var>
+    <script-var name="workspace_2" interval="1s">i3-workspace-list --num 2 | wc -l</script-var>
+    <script-var name="workspace_3" interval="1s">i3-workspace-list --num 3 | wc -l</script-var>
+    <script-var name="workspace_4" interval="1s">i3-workspace-list --num 4 | wc -l</script-var>
+    <script-var name="workspace_5" interval="1s">i3-workspace-list --num 5 | wc -l</script-var>
+    <script-var name="workspace_6" interval="1s">i3-workspace-list --num 6 | wc -l</script-var>
+    <script-var name="workspace_7" interval="1s">i3-workspace-list --num 7 | wc -l</script-var>
+    <script-var name="workspace_8" interval="1s">i3-workspace-list --num 8 | wc -l</script-var>
+    <script-var name="workspace_9" interval="1s">i3-workspace-list --num 9 | wc -l</script-var>
   </variables>
 
   <windows>
@@ -119,6 +152,13 @@
       <geometry x="1410" y="720" width="130" height="130"/>
       <widget>
         <volume/>
+      </widget>
+    </window>
+
+    <window name="workspaces">
+      <geometry x="1710" y="420" width="280" height="280"/>
+      <widget>
+        <workspaces/>
       </widget>
     </window>
 
