@@ -5,8 +5,8 @@
         <box orientation="h" halign="center" space-evenly="false">
           <box class="music_cover" style="background-image: url('{{music_cover}}');">{{music_generate_cover}}</box>
           <box orientation="v" space-evenly="false">
-            <box class="music_title">{{music_title}}</box>
-            <box class="music_artist">{{music_artist}}</box>
+            <label class="music_title" text="{{music_title}}" wrap="true" />
+            <label class="music_artist" text="{{music_artist}}" wrap="true" />
           </box>
         </box>
       </box>
@@ -38,6 +38,20 @@
       </box>
     </def>
 
+    <def name="date_time">
+      <box orientation="v" space-evenly="false">
+        <box class="date">{{time}}</box>
+        <box class="time">{{date}}</box>
+      </box>
+    </def>
+
+    <def name="volume">
+      <box orientation="v" space-evenly="false">
+        <label class="icon" text="" />
+        <label text="{{current_volume}}%" />
+      </box>
+    </def>
+
   </definitions>
   
   <variables>
@@ -51,6 +65,11 @@
     <script-var name="crypto_ada_price" interval="1m">curl -s chf.rate.sx/1ada | xargs printf "%.2f\n"</script-var>
     <script-var name="crypto_bnb_price" interval="1m">curl -s chf.rate.sx/1bnb | xargs printf "%.2f\n"</script-var>
     <script-var name="crypto_dot_price" interval="1m">curl -s chf.rate.sx/1dot | xargs printf "%.2f\n"</script-var>
+
+    <script-var name="date" interval="1s">date "+%Y.%m.%d"</script-var>
+    <script-var name="time" interval="1s">date "+%H:%M:%S"</script-var>
+
+    <script-var name="current_volume" interval="1s">pamixer --get-volume</script-var>
   </variables>
 
   <windows>
@@ -86,6 +105,20 @@
       <geometry x="810" y="720" width="280" height="130"/>
       <widget>
         <crypto_ada/>
+      </widget>
+    </window>
+
+    <window name="date_time">
+      <geometry x="1110" y="720" width="280" height="130"/>
+      <widget>
+        <date_time/>
+      </widget>
+    </window>
+
+    <window name="volume">
+      <geometry x="1410" y="720" width="130" height="130"/>
+      <widget>
+        <volume/>
       </widget>
     </window>
 

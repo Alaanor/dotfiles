@@ -32,7 +32,7 @@ window {
 
 .crypto_price {
   font-size: 38px;
-  margin-top: 25px;
+  margin-top: 30px;
   font-weight: bold;
 }
 
@@ -40,3 +40,19 @@ window {
   font-size: 16px;
 }
 
+.date_time {
+  font-size: 32px;
+  font-weight: bold;
+  margin-top: 25px;
+}
+
+.volume {
+  font-size: 32px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.volume > .icon {
+  font-size: 50px;
+  margin-top: 0px;
+}
