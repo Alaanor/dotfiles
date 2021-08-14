@@ -126,9 +126,6 @@ default_floating_border none
 # rofi
 bindsym $mod+d exec rofi -show drun
 
-# polybar
-exec --no-startup-id polybar gruv
-
 # screenshot
 bindsym $alt+1 exec flameshot gui
 
