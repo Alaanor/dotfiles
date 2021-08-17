@@ -6,6 +6,12 @@ fi
 # Variable
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.dotnet/tools:$PATH
 export ZSH="/home/max/.oh-my-zsh"
+export FZF_BASE=/usr/bin/fzf
+
+# fcitx layout
+export XMODIFIERS=@im=fcitx
+export QT_IM_MODULE=fcitx
+export GTK_IM_MODULE=fcitx
 
 # Theme
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -18,10 +24,7 @@ plugins=(
   npm
 )
 
-export FZF_BASE=/usr/bin/fzf
 source /usr/share/zsh/plugins/alias-tips/alias-tips.plugin.zsh
-
-# oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
 # Aliases
