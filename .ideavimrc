@@ -2,7 +2,6 @@
 set visualbell
 set noerrorbells
 set clipboard+=unnamed
-set commentary
 set so=999
 set relativenumber
 
@@ -19,7 +18,7 @@ let mapleader=" "
 inoremap jj <Esc>
 
 " Control (visual action) jetbrains windows
-nnoremap <Leader>vn :action ActivateProjectToolWindow<CR>
+nnoremap <Leader>vn :NERDTreeToggle<CR>
 nnoremap <Leader>vha :action HideAllWindows<CR>
 nnoremap <Leader>vdf :action ToggleDistractionFreeMode<CR>
 nnoremap <Leader>vfs :action ToggleFullScreen<CR>
@@ -31,7 +30,7 @@ nnoremap <Leader>gs :action GotoSuperMethod<CR>
 nnoremap <Leader>gi :action GotoImplementation<CR>
 nnoremap <Leader>gb :action JumpToLastChange<CR>
 
-" Naviguation actions
+" Navigation actions
 nnoremap <Leader>ns :action FileStructurePopup<CR>
 
 " extract actions
@@ -48,6 +47,8 @@ nnoremap <Leader>re :action RenameElement<CR>
 " Plugin
 set surround
 set easymotion
+set commentary
+set NERDTree
 
 " EasyMotion
 let g:EasyMotion_smartcase = 1
