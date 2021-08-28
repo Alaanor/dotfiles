@@ -18,11 +18,14 @@ let mapleader=" "
 inoremap jj <Esc>
 
 " Control (visual action) jetbrains windows
-nnoremap <Leader>vn :NERDTreeToggle<CR>
 nnoremap <Leader>vha :action HideAllWindows<CR>
 nnoremap <Leader>vdf :action ToggleDistractionFreeMode<CR>
 nnoremap <Leader>vfs :action ToggleFullScreen<CR>
 nnoremap <Leader>vfz :action ToggleZenMode<CR>
+
+" NERDTree (f = file explorer)
+nnoremap <Leader>ff :NERDTree<CR>
+nnoremap <Leader>fc :NERDTreeClose<CR>
 
 " Go to
 nnoremap <Leader>gd :action GotoDeclaration<CR>
