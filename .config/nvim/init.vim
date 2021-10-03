@@ -7,6 +7,7 @@ set relativenumber
 set hlsearch
 set cursorline
 set clipboard=unnamedplus
+set smartindent
 
 " tab
 set tabstop=2
@@ -41,6 +42,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-surround'
     Plug 'mboughaba/i3config.vim' 
     Plug 'elkowar/yuck.vim'
+    Plug 'hashivim/vim-terraform'
 
 call plug#end()
 
