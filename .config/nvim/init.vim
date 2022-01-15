@@ -39,6 +39,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'unblevable/quick-scope'
     Plug 'chrisbra/sudoedit.vim'
     Plug 'tpope/vim-surround'
+    Plug 'mboughaba/i3config.vim' 
+    Plug 'elkowar/yuck.vim'
 
 call plug#end()
 
