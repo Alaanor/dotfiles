@@ -1,0 +1,94 @@
+(defwidget dashboard []
+  (box :orientation "h" :spacing 25 :space-evenly false
+    (box :orientation "v" :spacing 25 :space-evenly true
+      (crypto_price :name "XBT-CHF" :price crypto_btc_price)
+      (crypto_price :name "ETH-CHF" :price crypto_eth_price)
+      (crypto_price :name "ICP-CHF" :price crypto_icp_price))
+    (player)
+    (box :orientation "v" :spacing 25 :space-evenly true
+      (datetime)
+      (metric :name " Battery" :value {EWW_BATTERY['BAT0'].capacity})
+      (metric :name " Storage" :value {EWW_DISK['/'].used_perc}))
+    (box :orientation "v" :spacing 25 :space-evenly true
+      (wifi)
+      (graph_box :name " CPU" :value {EWW_CPU.avg} )
+      (metric :name " RAM" :value {EWW_RAM.used_mem_perc} ))))
+
+(defwidget blur_full []
+  (box :orientation "h" :space-evenly true))
+
+(defwidget crypto_price [name price]
+  (box :class "box" :orientation "v" :space-evenly false :height "125" :width "225" 
+    (label :class "crypto_text" :text name)
+    (label :class "crypto_price" :text price)))
+
+(defwidget player []
+  (box :class "box" :orientation "v" :space-evenly false
+    (box :class "music_cover" :style "background-image: url('${music_cover}')")
+    (label :class "music_title pl-20 pr-20" :text music_title :wrap true)
+    (label :class "music_artist pl-20 pr-20" :text music_artist :wrap true)
+  (label :text music_generate_cover :width 0 :height 0)))
+
+(defwidget datetime []
+  (box :class "box font-24 pa-20" :orientation "v" :space-evenly false
+    (label :text date)
+    (label :text time :class "pt-20")))
+
+(defwidget metric [name value]
+  (box :class "box font-24 pa-20" :orientation "v" :space-evenly false
+    (label :class "pb-10" :text name)
+    (box :orientation "h" :space-evenly false
+      (scale :min 0 :max 100 :value value )
+      (label :class "pl-20" :text "${ round(value, 0) }%"))))
+
+(defwidget graph_box [name value]
+  (box :orientation "v" :class "box" :space-evenly false
+    (label :class "font-24 pt-20 pb-10" :text "${name} ${round(value, 0)}%")
+    (graph
+      :height 50
+      :value value
+      :max 25
+      :min 0
+      :dynamic true
+      :time-range "10s"
+      :thickness 1)))
+
+(defwidget wifi []
+  (box :class "box font-20" :orientation "v" :space-evenly false
+    (label :class "font-24 pb-10" :text " ${wifi_name}")
+    (label :text " ${round(EWW_NET.wlp2s0.NET_UP / 1024, 0)}kB/s")
+    (label :text " ${round(EWW_NET.wlp2s0.NET_DOWN / 1024, 0)}kB/s")))
+
+(defpoll crypto_btc_price :initial "-" :interval "1m" "curl -s chf.rate.sx/1btc | xargs printf '%.2f'")
+(defpoll crypto_eth_price :initial "-" :interval "1m" "curl -s chf.rate.sx/1eth | xargs printf '%.2f'")
+(defpoll crypto_icp_price :initial "-" :interval "1m" "curl -s chf.rate.sx/1icp | xargs printf '%.2f'")
+
+(deflisten music_artist :initial "-" "playerctl --follow metadata --format '{{ artist }}'")
+(deflisten music_title :initial "-" "playerctl --follow metadata --format '{{title}}'")
+(defpoll music_cover :interval "1s" "echo /tmp/spotify/cover.png")
+(defpoll music_generate_cover :interval "1s" "~/.config/eww/scripts/generate_music_cover")
+
+(defpoll date :interval "1s" "date '+%Y.%m.%d'")
+(defpoll time :interval "1s" "date '+%H:%M:%S'")
+
+(defpoll wifi_name :initial "?" :interval "10s" "nmcli --get-values ssid device wifi | tail -n 1")
+
+(defwindow dashboard
+  :stacking "fg"
+  :wm-ignore true
+  :geometry (geometry
+              :x "0%"
+              :y "0%"
+              :anchor "center center")
+  (dashboard))
+
+(defwindow blur_full
+  :stacking "fg"
+  :wm-ignore true
+  :geometry (geometry
+              :x "0%"
+              :y "0%"
+              :width "100%"
+              :height "100%"
+              :anchor "center center")
+  (blur_full))
