@@ -200,8 +200,8 @@ smart_gaps on
 # Multimedia key
 # -------------------
 
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20
+bindsym XF86MonBrightnessUp exec light -A 20
+bindsym XF86MonBrightnessDown exec light -U 20
 
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
