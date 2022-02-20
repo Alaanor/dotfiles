@@ -4,7 +4,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Variable
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.dotnet/tools:$PATH
 export ZSH="/home/max/.oh-my-zsh"
 export FZF_BASE=/usr/bin/fzf
 
