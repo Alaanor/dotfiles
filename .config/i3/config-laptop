@@ -227,6 +227,8 @@ exec --no-startup-id picom --backend glx -b
 # touchpad gesture
 exec --no-startup-id libinput-gestures
 
+# notification
+exec --no-startup-id dunst
 
 # vim syntax for this file
 # vim:filetype=i3config
