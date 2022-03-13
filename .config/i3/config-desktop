@@ -121,6 +121,9 @@ for_window [floating] position center
 default_border none
 default_floating_border none
 
+# mouse
+focus_follows_mouse no
+
 # rofi
 bindsym $mod+d exec rofi -show drun
 
