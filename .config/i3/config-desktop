@@ -128,7 +128,7 @@ focus_follows_mouse no
 bindsym $mod+d exec rofi -show drun
 
 # screenshot
-bindsym $alt+1 exec flameshot gui
+bindsym Print exec flameshot gui
 
 # picom compositor
 exec --no-startup-id picom --backend glx -b
