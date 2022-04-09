@@ -145,6 +145,9 @@ bindsym XF86AudioPrev exec playerctl previous
 # keyboard fcitx5
 exec --no-startup-id fcitx5 -d
 
+# lockscreen
+bindsym $alt+l exec xsecurelock
+
 # auto start app
 exec --no-startup-id i3-msg 'workspace $ws2; exec /usr/bin/firefox'
 exec --no-startup-id /usr/bin/discord
