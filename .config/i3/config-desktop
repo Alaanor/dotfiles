@@ -131,8 +131,8 @@ bindsym $mod+d exec rofi -show drun
 bindsym $alt+1 exec flameshot gui
 bindsym $alt+2 exec flameshot gui -d 2500
 
-# picom compositor
-exec --no-startup-id picom --backend glx -b
+# lockscreen
+bindsym $alt+l exec xsecurelock
 
 # audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
@@ -145,8 +145,11 @@ bindsym XF86AudioPrev exec playerctl previous
 # keyboard fcitx5
 exec --no-startup-id fcitx5 -d
 
-# lockscreen
-bindsym $alt+l exec xsecurelock
+# picom compositor
+exec --no-startup-id picom --backend glx -b
+
+# sound management
+exec --no-startup-id easyeffects --gapplication-service
 
 # auto start app
 exec --no-startup-id i3-msg 'workspace $ws2; exec /usr/bin/firefox'
