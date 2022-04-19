@@ -142,6 +142,11 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
+# mouse setup
+exec --no-startup-id xinput --set-prop 9 'libinput Accel Profile Enabled' 0, 1
+exec --no-startup-id xinput --set-prop 9 'libinput Accel Speed' 0
+exec --no-startup-id xset m 0 0
+
 # keyboard fcitx5
 exec --no-startup-id fcitx5 -d
 
