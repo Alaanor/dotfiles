@@ -160,6 +160,7 @@ exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id i3-msg 'workspace $ws2; exec /usr/bin/firefox'
 exec --no-startup-id /usr/bin/discord
 exec --no-startup-id /usr/bin/spotify
+exec --no-startup-id steam -silent
 
 # eww widget
 exec --no-startup-id eww daemon
