@@ -33,8 +33,8 @@
   
     <def name="crypto_ada">
       <box orientation="v" space-evenly="false">
-        <box class="crypto_price">{{crypto_ada_price}}</box>
-        <box class="crypto_text">ADA-CHF</box>
+        <box class="crypto_price">{{crypto_icp_price}}</box>
+        <box class="crypto_text">ICP-CHF</box>
       </box>
     </def>
 
@@ -85,9 +85,7 @@
 
     <script-var name="crypto_btc_price" interval="1m">curl -s chf.rate.sx/1btc | xargs printf "%.2f\n"</script-var>
     <script-var name="crypto_eth_price" interval="1m">curl -s chf.rate.sx/1eth | xargs printf "%.2f\n"</script-var>
-    <script-var name="crypto_ada_price" interval="1m">curl -s chf.rate.sx/1ada | xargs printf "%.2f\n"</script-var>
-    <script-var name="crypto_bnb_price" interval="1m">curl -s chf.rate.sx/1bnb | xargs printf "%.2f\n"</script-var>
-    <script-var name="crypto_dot_price" interval="1m">curl -s chf.rate.sx/1dot | xargs printf "%.2f\n"</script-var>
+    <script-var name="crypto_icp_price" interval="1m">curl -s chf.rate.sx/1icp | xargs printf "%.2f\n"</script-var>
 
     <script-var name="date" interval="1s">date "+%Y.%m.%d"</script-var>
     <script-var name="time" interval="1s">date "+%H:%M:%S"</script-var>
