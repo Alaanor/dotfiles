@@ -37,7 +37,7 @@ nnoremap <Leader>gb :action JumpToLastChange<CR>
 nnoremap <Leader>ns :action FileStructurePopup<CR>
 
 " extract actions
-nnoremap <Leader>ei :action ExtractInterfaceCR>
+nnoremap <Leader>ei :action ExtractInterface<CR>
 nnoremap <Leader>en :action ExtractClass<CR>
 nnoremap <Leader>em :action ExtractMethod<CR>
 
