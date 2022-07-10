@@ -3,6 +3,7 @@ if pidof ffmpeg
   then
     killall ffmpeg
     notify-send 'Stopped Recording!' --icon=dialog-information
+    dragon-drag-and-drop --and-exit $(ls -Artd ~/Videos/screencapture/* | tail -n 1)
   else 
     slop=$(slop -f "%x %y %w %h" -l -c 1,0.39,0,0.2)
     read -r X Y W H < <(echo $slop)
