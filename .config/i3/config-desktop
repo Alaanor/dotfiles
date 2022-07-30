@@ -138,7 +138,10 @@ bindsym $alt+2 exec flameshot gui -d 2500
 bindsym $alt+3 exec screencapture
 
 # lockscreen
-bindsym $alt+l exec xsecurelock
+bindsym $alt+l exec screenlock
+
+# korean ocr copy
+bindsym $alt+0 exec /home/max/bin/paddle-ocr/kr_ocr
 
 # audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
