@@ -171,6 +171,11 @@ exec --no-startup-id /usr/bin/discord
 exec --no-startup-id /usr/bin/spotify
 exec --no-startup-id steam -silent
 
+# activity watcher
+exec --no-startup-id aw-server
+exec --no-startup-id aw-watcher-window
+exec --no-startup-id aw-watcher-afk
+
 # eww widget
 exec --no-startup-id eww daemon
 bindsym $mod+w exec --no-startup-id ~/.config/eww/toggle_dashboard
