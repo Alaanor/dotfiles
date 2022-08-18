@@ -14,8 +14,8 @@ if pidof ffmpeg
      then
       notify-send 'Started Recording!' --icon=dialog-information
       
-      ffmpeg -f x11grab -s "$W"x"$H" -framerate 60  -thread_queue_size 512  -i $DISPLAY.0+$X,$Y \
-       -vcodec libx264 -qp 18 -preset ultrafast \
+      ffmpeg -f pulse -ac 1 -i default -f x11grab -s "$W"x"$H" -framerate 30  -thread_queue_size 512  -i $DISPLAY.0+$X,$Y \
+       -acodec aac -vcodec libx264 -qp 28 -preset ultrafast \
        ~/Videos/screencapture/recording-$time.mp4
     fi
 fi
