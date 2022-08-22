@@ -1,0 +1,14 @@
+#!/bin/bash
+
+slop=$(slop -f "%x %y %w %h" -l -c 1,0.39.0,0.2)
+read -r X Y W H < <(echo $slop)
+month=$(date +%Y-%m)
+time=$(date +%F_%T)
+width=${#W}
+
+if [ $width -gt 0 ];
+then
+  mkdir -p /home/max/media/screenshot/$month
+  scrot -a "$X,$Y,$W,$H" -F /home/max/media/screenshot/$month/$time.png
+  xclip -selection clipboard -target image/png /home/max/media/screenshot/$month/$time.png
+fi

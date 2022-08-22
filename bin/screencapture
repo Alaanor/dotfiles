@@ -1,9 +1,9 @@
-#!/bin/bash
+!/bin/bash
 if pidof ffmpeg
   then
     killall ffmpeg
     notify-send 'Stopped Recording!' --icon=dialog-information
-    dragon-drag-and-drop --and-exit $(ls -Artd ~/Videos/screencapture/* | tail -n 1)
+    dragon-drag-and-drop --and-exit $(ls -Artd ~/media/screencapture/* | tail -n 1)
   else 
     slop=$(slop -f "%x %y %w %h" -l -c 1,0.39,0,0.2)
     read -r X Y W H < <(echo $slop)
@@ -16,6 +16,6 @@ if pidof ffmpeg
       
       ffmpeg -f pulse -ac 1 -i default -f x11grab -s "$W"x"$H" -framerate 30  -thread_queue_size 512  -i $DISPLAY.0+$X,$Y \
        -acodec aac -vcodec libx264 -qp 28 -preset ultrafast \
-       ~/Videos/screencapture/recording-$time.mp4
+       ~/media/screencapture/recording-$time.mp4
     fi
 fi
