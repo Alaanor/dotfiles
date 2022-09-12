@@ -24,9 +24,9 @@ plugins=(
   fzf
   archlinux
   npm
+  autoupdate
 )
 
-source /usr/share/zsh/plugins/alias-tips/alias-tips.plugin.zsh
 source $ZSH/oh-my-zsh.sh
 
 # Aliases
@@ -34,8 +34,8 @@ alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles.git/ --work-tree=$HOME'
 alias dnd='dragon-drag-and-drop --and-exit'
 alias ssh='TERM=xterm-256color ssh'
 
+
 # exec p10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/bin/terraform terraform
