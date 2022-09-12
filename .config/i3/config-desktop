@@ -137,6 +137,9 @@ bindsym $alt+2 exec flameshot gui -d 2500
 # screencapture
 bindsym $alt+3 exec screencapture
 
+# game replay save
+bindsym $alt+4 exec killall --signal SIGTERM ffmpeg
+
 # lockscreen
 bindsym $alt+l exec screenlock
 
@@ -155,6 +158,9 @@ bindsym XF86AudioPrev exec playerctl previous
 exec --no-startup-id xinput --set-prop 9 'libinput Accel Profile Enabled' 0, 1
 exec --no-startup-id xinput --set-prop 9 'libinput Accel Speed' 0
 exec --no-startup-id xset m 0 0
+
+# wallpaper
+exec --no-startup-id feh --bg-fill ~/media/picture/wp-chad.jpg
 
 # keyboard fcitx5
 exec --no-startup-id fcitx5 -d
@@ -175,9 +181,7 @@ exec --no-startup-id /usr/bin/spotify
 exec --no-startup-id steam -silent
 
 # activity watcher
-exec --no-startup-id aw-server
-exec --no-startup-id aw-watcher-window
-exec --no-startup-id aw-watcher-afk
+exec --no-startup-id start-activity-watcher
 
 # eww widget
 exec --no-startup-id eww daemon
