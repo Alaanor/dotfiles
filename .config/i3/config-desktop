@@ -133,6 +133,7 @@ bindsym $mod+d exec rofi -show drun
 # screenshot
 bindsym $alt+1 exec screenshot
 bindsym $alt+2 exec flameshot gui -d 2500
+bindsym $alt+5 exec screenshot --fullscreen
 
 # screencapture
 bindsym $alt+3 exec screencapture
