@@ -3,7 +3,7 @@ set $mod Mod4
 set $alt Mod1
 
 # terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec wezterm
 
 # kill focused
 bindsym $mod+Shift+Q kill
@@ -163,8 +163,8 @@ exec --no-startup-id xset m 0 0
 # wallpaper
 exec --no-startup-id feh --bg-fill ~/media/picture/wp-chad.jpg
 
-# keyboard fcitx5
-exec --no-startup-id fcitx5 -d
+# keyboard input
+exec --no-startup-id ibus-daemon -drxR
 
 # picom compositor
 exec --no-startup-id picom --backend glx -b
