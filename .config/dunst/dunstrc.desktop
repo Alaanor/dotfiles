@@ -1,6 +1,6 @@
 [global]
-    width = 500
-    height = 500
+    width = 300
+    height = 300
 
     origin = top-right
     offset = 10x10
@@ -15,7 +15,7 @@
     frame_width = 0
     separator_color = frame
  
-    font = FuraCode Nerd Font Mono 24
+    font = FuraCode Nerd Font Mono 12
     line_height = 0
     markup = full
     format = "<b>%s</b>\n%b"
