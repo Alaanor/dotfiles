@@ -5,7 +5,7 @@ is_open=$(eww windows | grep -G "^\*blur_full$" | wc -l)
 echo $is_open
 
 if [ "$is_open" == "0" ]; then
-  eww open-many blur_full player crypto_btc crypto_eth crypto_ada date_time volume workspaces
+  eww open-many blur_full dashboard
 else
   eww close-all
 fi

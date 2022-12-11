@@ -1,0 +1,133 @@
+(defwidget dashboard []
+  (box :orientation "h" :spacing 25 :space-evenly false
+    (box :orientation "v" :spacing 25 :space-evenly true
+      (crypto_price :name "XBT-CHF" :price crypto_btc_price)
+      (crypto_price :name "ETH-CHF" :price crypto_eth_price)
+      (crypto_price :name "ICP-CHF" :price crypto_icp_price))
+    (player)
+    (box :orientation "v" :spacing 25 :space-evenly true
+      (datetime)
+      (metric :name " Volume" :value volume)
+      (metric :name " Storage" :value {EWW_DISK['/'].used_perc}))
+    (box :orientation "v" :spacing 25 :space-evenly true
+      (graph_box :name " CPU" :value {EWW_CPU.avg} )
+      (metric :name " RAM" :value {EWW_RAM.used_mem_perc} )
+      (focus_mode))
+    (box :orientation "v" :spacing 25 :space-evenly true
+      (workspaces))))
+
+(defwidget blur_full []
+  (box :orientation "h" :space-evenly true))
+
+(defwidget crypto_price [name price]
+  (box :class "box" :orientation "v" :space-evenly false :height "125" :width "225" 
+    (label :class "crypto_text" :text name)
+    (label :class "crypto_price" :text price)))
+
+(defwidget player []
+  (box :class "box" :orientation "v" :space-evenly false
+    (box :class "music_cover" :style "background-image: url('${music_cover}')")
+    (label :class "music_title pl-20 pr-20" :text music_title :wrap true)
+    (label :class "music_artist pl-20 pr-20" :text music_artist :wrap true)
+  (label :text music_generate_cover :width 0 :height 0)))
+
+(defwidget datetime []
+  (box :class "box font-24 pa-20" :orientation "v" :space-evenly false
+    (label :text date)
+    (label :text time :class "pt-20")))
+
+(defwidget metric [name value]
+  (box :class "box font-24 pa-20" :orientation "v" :space-evenly false
+    (label :class "pb-10" :text name)
+    (box :orientation "h" :space-evenly false
+      (scale :min 0 :max 100 :value value )
+      (label :class "pl-20" :text "${ round(value, 0) }%"))))
+
+(defwidget graph_box [name value]
+  (box :orientation "v" :class "box" :space-evenly false
+    (label :class "font-24 pt-20 pb-10" :text "${name} ${round(value, 0)}%")
+    (graph
+      :height 50
+      :value value
+      :max 25
+      :min 0
+      :dynamic true
+      :time-range "10s"
+      :thickness 1)))
+
+(defwidget workspaces []
+  (box :class "box font-36 pa-20" :orientation "h" :space-evenly false
+    (box :class "pl-20 pr-50" :orientation "v"
+      (label :class "screen-label font-48" :text "")
+      (label :class {workspace_1_visible == 1 ? "visible" : ""} :text {workspace_1_open == 1 ? "" : ""})
+      (label :class {workspace_4_visible == 1 ? "visible" : ""} :text {workspace_4_open == 1 ? "" : ""})
+      (label :class {workspace_7_visible == 1 ? "visible" : ""} :text {workspace_7_open == 1 ? "" : ""}))
+    (box :class "pr-50" :orientation "v"
+      (label :class "screen-label font-48" :text "")
+      (label :class {workspace_2_visible == 1 ? "visible" : ""} :text {workspace_2_open == 1 ? "" : ""})
+      (label :class {workspace_5_visible == 1 ? "visible" : ""} :text {workspace_5_open == 1 ? "" : ""})
+      (label :class {workspace_8_visible == 1 ? "visible" : ""} :text {workspace_8_open == 1 ? "" : ""}))
+    (box :class "pr-20" :orientation "v"
+      (label :class "screen-label font-48" :text "")
+      (label :class {workspace_3_visible == 1 ? "visible" : ""} :text {workspace_3_open == 1 ? "" : ""})
+      (label :class {workspace_6_visible == 1 ? "visible" : ""} :text {workspace_6_open == 1 ? "" : ""})
+      (label :class {workspace_9_visible == 1 ? "visible" : ""} :text {workspace_9_open == 1 ? "" : ""}))))
+
+(defwidget focus_mode []
+  (box :class "box" :orientation "v"
+    (button :onclick "toggle_focus_mode" :class "font-24 ${focus_mode == "true" ? "selected" : ""}" "Focus mode")))
+
+(defpoll crypto_btc_price :initial "-" :interval "1m" "curl -s chf.rate.sx/1btc | xargs printf '%.2f'")
+(defpoll crypto_eth_price :initial "-" :interval "1m" "curl -s chf.rate.sx/1eth | xargs printf '%.2f'")
+(defpoll crypto_icp_price :initial "-" :interval "1m" "curl -s chf.rate.sx/1icp | xargs printf '%.2f'")
+
+(deflisten music_artist :initial "-" "playerctl --follow metadata --format '{{ artist }}'")
+(deflisten music_title :initial "-" "playerctl --follow metadata --format '{{title}}'")
+(defpoll music_cover :interval "1s" "echo /tmp/spotify/cover.png")
+(defpoll music_generate_cover :interval "1s" "~/.config/eww/scripts/generate_music_cover")
+(defpoll volume :interval "1s" "pamixer --get-volume")
+
+(defpoll date :interval "1s" "date '+%Y.%m.%d'")
+(defpoll time :interval "1s" "date '+%H:%M:%S'")
+
+(defpoll workspace_1_open :interval "1s" "i3-workspace-list --num 1 | wc -l")
+(defpoll workspace_2_open :interval "1s" "i3-workspace-list --num 2 | wc -l")
+(defpoll workspace_3_open :interval "1s" "i3-workspace-list --num 3 | wc -l")
+(defpoll workspace_4_open :interval "1s" "i3-workspace-list --num 4 | wc -l")
+(defpoll workspace_5_open :interval "1s" "i3-workspace-list --num 5 | wc -l")
+(defpoll workspace_6_open :interval "1s" "i3-workspace-list --num 6 | wc -l")
+(defpoll workspace_7_open :interval "1s" "i3-workspace-list --num 7 | wc -l")
+(defpoll workspace_8_open :interval "1s" "i3-workspace-list --num 8 | wc -l")
+(defpoll workspace_9_open :interval "1s" "i3-workspace-list --num 9 | wc -l")
+
+(defpoll workspace_1_visible :interval "1s" "i3-workspace-list --num 1 --visible true | wc -l")
+(defpoll workspace_2_visible :interval "1s" "i3-workspace-list --num 2 --visible true | wc -l")
+(defpoll workspace_3_visible :interval "1s" "i3-workspace-list --num 3 --visible true | wc -l")
+(defpoll workspace_4_visible :interval "1s" "i3-workspace-list --num 4 --visible true | wc -l")
+(defpoll workspace_5_visible :interval "1s" "i3-workspace-list --num 5 --visible true | wc -l")
+(defpoll workspace_6_visible :interval "1s" "i3-workspace-list --num 6 --visible true | wc -l")
+(defpoll workspace_7_visible :interval "1s" "i3-workspace-list --num 7 --visible true | wc -l")
+(defpoll workspace_8_visible :interval "1s" "i3-workspace-list --num 8 --visible true | wc -l")
+(defpoll workspace_9_visible :interval "1s" "i3-workspace-list --num 9 --visible true | wc -l")
+
+(defpoll focus_mode :interval "1s" "dunstctl is-paused")
+
+(defwindow dashboard
+  :stacking "fg"
+  :wm-ignore true
+  :geometry (geometry
+              :x "0%"
+              :y "0%"
+              :anchor "center center")
+  (dashboard))
+
+(defwindow blur_full
+  :stacking "fg"
+  :wm-ignore true
+  :geometry (geometry
+              :x "0%"
+              :y "0%"
+              :width "100%"
+              :height "100%"
+              :anchor "center center")
+  (blur_full))
