@@ -11,23 +11,29 @@
 }
 
 .music_cover {
-  background-size: 285px;
-  min-height: 285px;
-  min-width: 285px;
-  margin: 20px;
-  border-radius: 50px;
+  background-size: cover;
+  background-position: center;
+  // min-width: 450px;
+  min-height: 450px;
+  border-radius: 10px;
+}
+
+.music_cover_fade {
+  background: rgba(#000, 0.75)
 }
 
 .music_title {
-  min-width: 280px;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
+  font-size: 32px;
+  font-weight: 900;
+  padding-left: 25px;
+  padding-bottom: 25px;
 }
 
 .music_artist {
   font-size: 24px;
-  margin-bottom: 10px;
+  font-weight: 600;
+  padding-left: 25px;
+  padding-top: 350px;
 }
 
 .crypto_price {

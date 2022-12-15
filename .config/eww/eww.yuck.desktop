@@ -25,12 +25,13 @@
     (label :class "crypto_price" :text price)))
 
 (defwidget player []
-  (box :class "box" :orientation "v" :space-evenly false
-    (box :class "music_cover" :style "background-image: url('${music_cover}')")
-    (label :class "music_title pl-20 pr-20" :text music_title :wrap true)
-    (label :class "music_artist pl-20 pr-20" :text music_artist :wrap true)
-  (label :text music_generate_cover :width 0 :height 0)))
-
+  (box :class "box" :width "225" :orientation "v" :space-evenly false
+    (box :class "music_cover" :style "background-image: url('${music_cover}')"
+      (box :class "music_cover_fade" :width "450" :orientation "v" :space-evenly false
+        (label :class "music_artist" :text music_artist :wrap true :xalign 0)
+        (label :class "music_title" :text music_title :wrap true :xalign 0)
+        (label :text music_generate_cover :width 0 :height 0)))))
+      
 (defwidget datetime []
   (box :class "box font-24 pa-20" :orientation "v" :space-evenly false
     (label :text date)
