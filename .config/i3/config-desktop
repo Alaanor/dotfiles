@@ -120,6 +120,8 @@ for_window [floating] position center
 # floating app by default
 for_window [class="anbox"] floating enable
 
+for_window [class="^league of legends.exe$"] fullscreen
+
 # border
 default_border none
 default_floating_border none
