@@ -16,6 +16,7 @@ let mapleader=" "
 
 " Useful binding
 inoremap jj <Esc>
+noremap / :action Find<CR>
 
 " Control (visual action) jetbrains windows
 nnoremap <Leader>vha :action HideAllWindows<CR>
