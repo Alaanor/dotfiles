@@ -78,9 +78,9 @@
   (box :class "box" :orientation "v"
     (button :onclick "toggle_focus_mode" :class "font-24 ${focus_mode == "true" ? "selected" : ""}" "Focus mode")))
 
-(defpoll crypto_btc_price :initial "-" :interval "1m" "curl -s chf.rate.sx/1btc | xargs printf '%.2f'")
-(defpoll crypto_eth_price :initial "-" :interval "1m" "curl -s chf.rate.sx/1eth | xargs printf '%.2f'")
-(defpoll crypto_icp_price :initial "-" :interval "1m" "curl -s chf.rate.sx/1icp | xargs printf '%.2f'")
+(defpoll crypto_btc_price :initial "-" :interval "1m" "crypto_price BTC")
+(defpoll crypto_eth_price :initial "-" :interval "1m" "crypto_price ETH")
+(defpoll crypto_icp_price :initial "-" :interval "1m" "crypto_price ICP")
 
 (deflisten music_artist :initial "-" "playerctl --follow metadata --format '{{ artist }}'")
 (deflisten music_title :initial "-" "playerctl --follow metadata --format '{{title}}'")
