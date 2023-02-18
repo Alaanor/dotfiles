@@ -23,6 +23,7 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+source /usr/share/nvm/init-nvm.sh
 
 # Aliases
 alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles.git/ --work-tree=$HOME'
