@@ -7,7 +7,7 @@
     (player)
     (box :orientation "v" :spacing 25 :space-evenly true
       (datetime)
-      (metric :name " Volume" :value volume)
+      (metric :name " Volume" :value volume :disabled is_muted)
       (metric :name " Storage" :value {EWW_DISK['/'].used_perc}))
     (box :orientation "v" :spacing 25 :space-evenly true
       (graph_box :name " CPU" :value {EWW_CPU.avg} )
@@ -37,12 +37,14 @@
     (label :text date)
     (label :text time :class "pt-20")))
 
-(defwidget metric [name value]
+(defwidget metric [name value ?disabled]
   (box :class "box font-24 pa-20" :orientation "v" :space-evenly false
     (label :class "pb-10" :text name)
     (box :orientation "h" :space-evenly false
-      (scale :min 0 :max 100 :value value )
-      (label :class "pl-20" :text "${ round(value, 0) }%"))))
+      (scale :min 0 :max 100 :value value :class {disabled == 'true' ? 'disabled' : ''})
+      (label 
+        :class "pl-20"
+        :text {disabled == 'true' ? '-' : '${round(value, 0)}%'} ))))
 
 (defwidget graph_box [name value]
   (box :orientation "v" :class "box" :space-evenly false
@@ -87,6 +89,7 @@
 (defpoll music_cover :interval "1s" "echo /tmp/spotify/cover.png")
 (defpoll music_generate_cover :interval "1s" "~/.config/eww/scripts/generate_music_cover")
 (defpoll volume :interval "1s" "pamixer --get-volume")
+(defpoll is_muted :interval "1s" "pamixer --get-mute")
 
 (defpoll date :interval "1s" "date '+%Y.%m.%d'")
 (defpoll time :interval "1s" "date '+%H:%M:%S'")

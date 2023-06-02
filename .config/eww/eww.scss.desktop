@@ -109,6 +109,10 @@
   padding-right: 50px;
 }
 
+scale.disabled trough highlight {
+  background-color: #928374;
+}
+
 scale trough highlight {
   background-color: #98971a;
   border-radius: 10px;
@@ -134,3 +138,5 @@ graph {
   background-color: #98971a;
   color: #282828;
 }
+
+
