@@ -2,6 +2,10 @@
   all: unset;
 }
 
+.blur_full {
+  background-color: rgba(#000, 0.5)
+}
+
 .box {
   background-color: rgba(#000, 0.8);
   color: #ebdbb2;

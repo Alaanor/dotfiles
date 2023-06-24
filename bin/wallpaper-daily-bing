@@ -1,0 +1,17 @@
+#!/bin/bash
+
+random=$(($RANDOM % 8))
+json=$(curl --silent https://www.bing.com/HPImageArchive.aspx\?format\=js\&idx\=$random\&n\=1\&mkt\=ch-FR)
+date=$(echo $json | jq -r '.images[0].startdate')
+url=$(echo $json | jq -r '.images[0].url')
+
+if [ -f "/home/max/media/picture/$date.jpg" ]; then
+  echo 'cache hit';
+  swww img /home/max/media/picture/$date.jpg -t any
+  exit
+fi
+
+echo 'fetching...'
+
+curl --silent "bing.com$url" -o /home/max/media/picture/$date.jpg
+swww img /home/max/media/picture/$date.jpg -t any

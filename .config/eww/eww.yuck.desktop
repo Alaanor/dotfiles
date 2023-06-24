@@ -17,7 +17,7 @@
       (workspaces))))
 
 (defwidget blur_full []
-  (box :orientation "h" :space-evenly true))
+  (box :class "blur_full" :orientation "h" :space-evenly true))
 
 (defwidget crypto_price [name price]
   (box :class "box" :orientation "v" :space-evenly false :height "125" :width "225" 
@@ -118,7 +118,7 @@
 
 (defwindow dashboard
   :stacking "fg"
-  :wm-ignore true
+  :monitor 0
   :geometry (geometry
               :x "0%"
               :y "0%"
@@ -127,7 +127,7 @@
 
 (defwindow blur_full
   :stacking "fg"
-  :wm-ignore true
+  :monitor 0
   :geometry (geometry
               :x "0%"
               :y "0%"
