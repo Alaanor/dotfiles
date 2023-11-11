@@ -13,6 +13,10 @@ export GTK2_RC_FILES=$HOME/.gtkrc-2.0
 # Theme
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
+# config
+ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_CONFIG=/home/max/.config/tmux/tmux.conf
+
 # Plugins
 plugins=(
   git
@@ -20,6 +24,7 @@ plugins=(
   archlinux
   npm
   autoupdate
+  tmux
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -30,6 +35,7 @@ alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles.git/ --work-tree=$HOME'
 alias dnd='dragon-drag-and-drop --and-exit'
 alias ssh='TERM=xterm-256color ssh'
 
+eval "$(zoxide init zsh)"
 
 # exec p10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
