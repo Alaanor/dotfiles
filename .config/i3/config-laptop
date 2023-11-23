@@ -215,6 +215,7 @@ bindsym XF86AudioPrev exec playerctl previous
 exec --no-startup-id feh --bg-center /data/Image/Wallpaper/white-mountain.jpg
 
 # set keyboard layout
+exec --no-startup-id ibus-daemon -drxR
 exec --no-startup-id setxkbmap ch fr
 
 # screenshot
@@ -229,6 +230,7 @@ exec --no-startup-id libinput-gestures
 
 # notification
 exec --no-startup-id dunst
+
 
 # vim syntax for this file
 # vim:filetype=i3config

@@ -23,7 +23,7 @@ plugins=(
   fzf
   archlinux
   npm
-  autoupdate
+  rust
   tmux
 )
 

@@ -25,33 +25,3 @@ fi
 
 mkdir -p /home/max/media/screenshot/$month
 grimblast --freeze copysave area /home/max/media/screenshot/$month/$time.png
-
-# grim -g "$(slurp)" /home/max/media/screenshot/$month/$time.png
-# wl-copy < /home/max/media/screenshot/$month/$time.png
-
-
-# X version
-
-# if [ "$1" != "--fullscreen" ];
-# then
-#   slop=$(slop -f "%x %y %w %h" -l -c 1,0.39.0,0.2)
-#   read -r X Y W H < <(echo $slop)
-# fi
-#
-# month=$(date +%Y-%m)
-# time=$(date +%F_%T)
-# width=${#W}
-#
-# if [[ $width -gt 0 || "$1" == "--fullscreen" ]];
-# then
-#   mkdir -p /home/max/media/screenshot/$month
-#
-#   if [ "$1" == "--fullscreen" ];
-#   then
-#     scrot -F /home/max/media/screenshot/$month/$time.png
-#     notify-send -t 750 "done"
-#   else
-#     scrot -a "$X,$Y,$W,$H" -F /home/max/media/screenshot/$month/$time.png
-#   fi
-#   xclip -selection clipboard -target image/png /home/max/media/screenshot/$month/$time.png
-# fi

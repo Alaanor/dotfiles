@@ -1,18 +1,19 @@
-monitor=DP-3,1920x1080@60,0x0,1
-monitor=DP-1,2560x1440@240,1920x0,1
-monitor=HDMI-A-1,1920x1080x60,4480x0,1
-
-env = XCURSOR_SIZE,24
+monitor=,preferred,auto,auto
 
 input {
     kb_layout = ch
     kb_variant = fr
     kb_model =
-    kb_options = grp:alt_shift_toggle
+    kb_options =
     kb_rules =
 
     follow_mouse = 0
-    sensitivity = 0.2
+
+    touchpad {
+        natural_scroll = yes
+    }
+
+    sensitivity = 0.4 # -1.0 - 1.0, 0 means no modification.
     accel_profile = flat
 }
 
@@ -30,7 +31,6 @@ general {
 
 decoration {
     rounding = 5
-
     drop_shadow 8 yes
     shadow_range = 4
     shadow_render_power = 3
@@ -43,7 +43,6 @@ animations {
     animation = windows, 1, 7, myBezier
     animation = windowsOut, 1, 7, default, popin 80%
     animation = border, 1, 10, default
-    animation = borderangle, 1, 8, default
     animation = fade, 1, 7, default
     animation = workspaces, 1, 6, default
 }
@@ -59,7 +58,7 @@ master {
 }
 
 gestures {
-    workspace_swipe = off
+    workspace_swipe = on
 }
 
 device:epic-mouse-v1 {
@@ -76,12 +75,14 @@ windowrulev2=nofocus,class:^jetbrains-(?!toolbox),floating:1,title:^win\d+$
 $mainMod = SUPER
 
 # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-bind = $mainMod, return, exec, wezterm
+bind = $mainMod, return, exec, alacritty
 bind = SUPER_SHIFT, Q, killactive 
 bind = $mainMod, V, togglefloating
 bind = $mainMod, W, exec, ~/.config/eww/toggle_dashboard
 bind = $mainMod, D, exec, rofi -show drun
 bind = $mainMod, E, exec, rofimoji --action copy type --clipboarder wl-copy --max-recent=0
+}
+
 bind = $mainMod, P, pseudo
 bind = $mainMod, B, togglesplit
 
@@ -140,18 +141,6 @@ bind = ALT, 3, exec, screencapture
 # Move/resize windows with mainMod + LMB/RMB and dragging
 bindm = $mainMod, mouse:272, movewindow
 bindm = $mainMod, mouse:273, resizewindow
-
-workspace=name:1,monitor:DP-3
-workspace=name:2,monitor:DP-1
-workspace=name:3,monitor:HDMI-A-1
-
-workspace=name:4,monitor:DP-3
-workspace=name:5,monitor:DP-1
-workspace=name:6,monitor:HDMI-A-1
-
-workspace=name:7,monitor:DP-3
-workspace=name:8,monitor:DP-1
-workspace=name:9,monitor:HDMI-A-1
 
 exec-once=swww init
 exec-once=start-activity-watcher

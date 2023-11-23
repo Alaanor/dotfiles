@@ -48,6 +48,9 @@ nnoremap <Leader>rl :action Javascript.Linters.EsLint.Fix<CR>
 nnoremap <Leader>ra :action ShowIntentionActions<CR><Esc>
 nnoremap <Leader>re :action RenameElement<CR>
 
+" implement
+nnoremap <Leader>io :action OverrideMethods<CR>
+
 " Plugin
 set surround
 set easymotion
