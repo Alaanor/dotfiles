@@ -7,7 +7,7 @@ then
   dragon-drag-and-drop --and-exit $(ls -Artd ~/media/screencapture/* | tail -n 1)
 else
   time=$(date +%F-%T)
-  wl-screenrec -g "$(slurp)" -b "0.5 MB" --audio -f ~/media/screencapture/recording-$time.mp4
+  wl-screenrec -g "$(slurp)" -b "1 MB" --audio -f ~/media/screencapture/recording-$time.mp4
 fi
 
 
