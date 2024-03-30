@@ -75,7 +75,7 @@
 
 (defwindow dashboard
   :stacking "fg"
-  :wm-ignore true
+  :monitor 0
   :geometry (geometry
               :x "0%"
               :y "0%"
@@ -84,7 +84,7 @@
 
 (defwindow blur_full
   :stacking "fg"
-  :wm-ignore true
+  :monitor 0
   :geometry (geometry
               :x "0%"
               :y "0%"

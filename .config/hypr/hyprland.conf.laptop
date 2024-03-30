@@ -36,10 +36,7 @@ general {
 
 decoration {
     rounding = 5
-    drop_shadow 8 yes
-    shadow_range = 4
-    shadow_render_power = 3
-    col.shadow = rgba(1a1a1aee)
+    drop_shadow = no
 }
 
 animations {
@@ -83,7 +80,6 @@ bind = $mainMod, V, togglefloating
 bind = $mainMod, W, exec, ~/.config/eww/toggle_dashboard
 bind = $mainMod, D, exec, rofi -show drun
 bind = $mainMod, E, exec, rofimoji --action copy type --clipboarder wl-copy --max-recent=0
-}
 
 bind = $mainMod, P, pseudo
 bind = $mainMod, B, togglesplit
@@ -142,7 +138,7 @@ bind = ALT, 3, exec, screencapture
 bindm = $mainMod, mouse:272, movewindow
 bindm = $mainMod, mouse:273, resizewindow
 
-exec-once=swww init
+exec-once=swww init && swww img ~/media/picture/wallpaper.jpg
 exec-once=start-activity-watcher
 exec-once=eww daemon
 exec-once=ibus-daemon -xrd
