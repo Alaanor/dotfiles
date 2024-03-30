@@ -37,7 +37,7 @@ alias ssh='TERM=xterm-256color ssh'
 
 eval "$(zoxide init zsh)"
 
+autoload -U +X bashcompinit && bashcompinit
+
 # exec p10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-autoload -U +X bashcompinit && bashcompinit

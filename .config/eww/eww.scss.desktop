@@ -9,7 +9,7 @@
 .box {
   background-color: rgba(#000, 0.8);
   color: #ebdbb2;
-  font-family: FiraCode Nerd Font Mono;
+  font-family: FiraCodeNerdFont;
   border: 3px solid #ebdbb2;
   border-radius: 10px;
 }

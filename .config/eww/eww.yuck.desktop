@@ -35,7 +35,8 @@
 (defwidget datetime []
   (box :class "box font-24 pa-20" :orientation "v" :space-evenly false
     (label :text date)
-    (label :text time :class "pt-20")))
+    (label :text time :class "pt-20")
+    (label :text dow :class "pt-20")))
 
 (defwidget metric [name value ?disabled]
   (box :class "box font-24 pa-20" :orientation "v" :space-evenly false
@@ -93,6 +94,7 @@
 
 (defpoll date :interval "1s" "date '+%Y.%m.%d'")
 (defpoll time :interval "1s" "date '+%H:%M:%S'")
+(defpoll dow :interval "60s" "date '+%A (%V)'")
 
 (defpoll workspace_1_open :interval "1s" "i3-workspace-list --num 1 | wc -l")
 (defpoll workspace_2_open :interval "1s" "i3-workspace-list --num 2 | wc -l")
