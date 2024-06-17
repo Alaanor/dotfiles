@@ -1,6 +1,6 @@
 #!/bin/bash
 
-is_open=$(eww windows | grep -G "^\*blur_full$" | wc -l)
+is_open=$(eww active-windows | grep blur_full | wc -l)
 
 echo $is_open
 
