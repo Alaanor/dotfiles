@@ -30,7 +30,6 @@ general {
 
 decoration {
     rounding = 5
-    drop_shadow = no
 }
 
 animations {
@@ -47,11 +46,6 @@ animations {
 dwindle {
     pseudotile = yes
     preserve_split = yes
-    no_gaps_when_only = yes
-}
-
-master {
-    new_is_master = true
 }
 
 gestures {
@@ -67,13 +61,21 @@ misc {
     disable_hyprland_logo = true
 }
 
+# smart gaps
+workspace = w[tv1], gapsout:0, gapsin:0
+workspace = f[1], gapsout:0, gapsin:0
+windowrulev2 = bordersize 0, floating:0, onworkspace:w[tv1]
+windowrulev2 = rounding 0, floating:0, onworkspace:w[tv1]
+windowrulev2 = bordersize 0, floating:0, onworkspace:f[1]
+windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
+
 windowrulev2=nofocus,class:^jetbrains-(?!toolbox),floating:1,title:^win\d+$
 
 # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 $mainMod = SUPER
 
 # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-bind = $mainMod, return, exec, WAYLAND_DISPLAY=1 wezterm
+bind = $mainMod, return, exec, terminology
 bind = SUPER_SHIFT, Q, killactive 
 bind = $mainMod, V, togglefloating
 bind = $mainMod, W, exec, ~/.config/eww/toggle_dashboard
@@ -130,9 +132,9 @@ bind = ,XF86AudioPlay, exec, playerctl play-pause
 bind = ,XF86AudioNext, exec, playerctl next
 bind = ,XF86AudioPrev, exec, playerctl previous
 
-bind = ALT, 1, exec, screenshot
-bind = ALT, 2, exec, screenshot --delay 1.5
-bind = ALT, 3, exec, screencapture
+bind = ALT, 1, exec, ~/bin/screenshot
+bind = ALT, 2, exec, ~/bin/screenshot --delay 1.5
+bind = ALT, 3, exec, ~/bin/screencapture
 
 # Move/resize windows with mainMod + LMB/RMB and dragging
 bindm = $mainMod, mouse:272, movewindow
@@ -150,9 +152,8 @@ workspace=name:7,monitor:DP-3
 workspace=name:8,monitor:DP-1
 workspace=name:9,monitor:HDMI-A-1
 
-exec-once=swww-daemon
 exec-once=start-activity-watcher
 exec-once=eww daemon
+exec-once=hyprpaper
 exec-once=ibus-daemon -xrd
-exec=wallpaper-daily-bing
-
+exec-once=easyeffects -w

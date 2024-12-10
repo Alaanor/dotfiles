@@ -7,30 +7,7 @@ then
   dragon-drag-and-drop --and-exit $(ls -Artd ~/media/screencapture/* | tail -n 1)
 else
   time=$(date +%F-%T)
-  wl-screenrec -g "$(slurp)" -b "1 MB" --audio -f ~/media/screencapture/recording-$time.mp4
+  dim=$(hyprctl clients -j | jq -r ".[] | select(.workspace.id | IN($(hyprctl -j monitors | jq 'map(.activeWorkspace.id) | join(",")' | tr -d \")))" | jq -r ".at,.size" | jq -s "add" | jq '_nwise(4)' | jq -r '"\(.[0]),\(.[1]) \(.[2])x\(.[3])"'| slurp)
+  notify-send 'Screen recording starting'
+  wl-screenrec -g "$dim" -b "3 MB" --audio -f ~/media/screencapture/recording-$time.mp4
 fi
-
-
-
-# X version
-
-# if pidof ffmpeg
-#   then
-#     killall ffmpeg
-#     notify-send 'Stopped Recording!' --icon=dialog-information
-#    dragon-drag-and-drop --and-exit $(ls -Artd ~/media/screencapture/* | tail -n 1)
-#   else 
-#     slop=$(slop -f "%x %y %w %h" -l -c 1,0.39,0,0.2)
-#     read -r X Y W H < <(echo $slop)
-#     time=$(date +%F-%T)
-#     width=${#W}
-#
-#     if [ $width -gt 0 ];
-#      then
-#       notify-send 'Started Recording!' --icon=dialog-information
-#       
-#       ffmpeg -f pulse -ac 1 -i default -f x11grab -s "$W"x"$H" -framerate 30  -thread_queue_size 512  -i $DISPLAY.0+$X,$Y \
-#        -acodec aac -vcodec libx264 -qp 28 -preset ultrafast \
-#        ~/media/screencapture/recording-$time.mp4
-#     fi
-# fi

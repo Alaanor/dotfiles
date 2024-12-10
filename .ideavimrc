@@ -4,6 +4,7 @@ set noerrorbells
 set clipboard+=unnamed
 set so=999
 set relativenumber
+set notimeout
 
 " Unmap the illegal key - i dont wanna be a sinner
 noremap <Up> <NOP>
@@ -17,6 +18,8 @@ let mapleader=" "
 " Useful binding
 inoremap jj <Esc>
 noremap / :action Find<CR>
+nnoremap [[ :action MethodUp<CR>
+nnoremap ]] :action MethodDown<CR>
 
 " Control (visual action) jetbrains windows
 nnoremap <Leader>vha :action HideAllWindows<CR>
@@ -53,9 +56,10 @@ nnoremap <Leader>io :action OverrideMethods<CR>
 
 " Plugin
 set surround
-set easymotion
 set commentary
 set NERDTree
+set highlightedyank
+set which-key
 
 " EasyMotion
 let g:EasyMotion_smartcase = 1
