@@ -13,7 +13,7 @@ if [ ! -f $tmp_current_file ]; then
 fi
 
 current_id_in_file=$(<$tmp_current_file)
-current_id_in_metadata=$(playerctl metadata mpris:trackid)
+current_id_in_metadata=$(playerctl --player=spotify,firefox metadata mpris:trackid)
 
 fetch_and_update_cover() {
   artlink="$(playerctl metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"

@@ -25,8 +25,8 @@
     (label :class "crypto_price" :text price)))
 
 (defwidget player []
-  (box :class "box" :width "225" :orientation "v" :space-evenly false
-    (box :class "music_cover" :style "background-image: url('${music_cover}')"
+  (box :class "box" :halign "center" :valign "center" :width "225" :orientation "v" :space-evenly false
+    (box :class "music_cover"  :halign "center" :valign "center" :style "background-image: url('${music_cover}')"
       (box :class "music_cover_fade" :width "450" :orientation "v" :space-evenly false
         (label :class "music_artist" :text music_artist :wrap true :xalign 0)
         (label :class "music_title" :text music_title :wrap true :xalign 0)
