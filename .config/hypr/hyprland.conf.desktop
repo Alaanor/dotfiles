@@ -133,8 +133,9 @@ bind = ,XF86AudioNext, exec, playerctl next
 bind = ,XF86AudioPrev, exec, playerctl previous
 
 bind = ALT, 1, exec, ~/bin/screenshot
-bind = ALT, 2, exec, ~/bin/screenshot --delay 1.5
+bind = ALT, 2, exec, ~/bin/screenshot --delay 3
 bind = ALT, 3, exec, ~/bin/screencapture
+bind = ALT, 4, exec, ~/bin/ocr
 
 # Move/resize windows with mainMod + LMB/RMB and dragging
 bindm = $mainMod, mouse:272, movewindow
