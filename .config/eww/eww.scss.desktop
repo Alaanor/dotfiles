@@ -58,17 +58,6 @@
   margin-top: 25px;
 }
 
-.volume {
-  font-size: 32px;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-.volume > .icon {
-  font-size: 50px;
-  margin-top: 0px;
-}
-
 .font-48 {
   font-size: 48px;
 }
@@ -95,6 +84,10 @@
 
 .pb-10 {
   padding-bottom: 10px;
+}
+
+.pt-10 {
+  padding-top: 10px;
 }
 
 .pt-20 {
@@ -142,4 +135,3 @@ graph {
   background-color: #98971a;
   color: #282828;
 }
-

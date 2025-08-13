@@ -7,11 +7,11 @@
     (player)
     (box :orientation "v" :spacing 25 :space-evenly true
       (datetime)
-      (metric :name " Volume" :value volume :disabled is_muted)
-      (metric :name " Storage" :value {EWW_DISK['/'].used_perc}))
+      (metric :icon "" :text "Volume" :value volume :disabled is_muted)
+      (metric :icon "" :text "Storage" :value {EWW_DISK['/'].used_perc}))
     (box :orientation "v" :spacing 25 :space-evenly true
-      (graph_box :name " CPU" :value {EWW_CPU.avg} )
-      (metric :name " RAM" :value {EWW_RAM.used_mem_perc} )
+      (graph_box :icon "" :text "CPU" :value {EWW_CPU.avg} )
+      (metric :icon "󰍛" :text "RAM" :value {EWW_RAM.used_mem_perc} )
       (focus_mode))
     (box :orientation "v" :spacing 25 :space-evenly true
       (workspaces))))
@@ -33,27 +33,29 @@
         (label :text music_generate_cover :width 0 :height 0)))))
       
 (defwidget datetime []
-  (box :class "box font-24 pa-20" :orientation "v" :space-evenly false
+  (box :class "box font-20 pa-20" :orientation "v" :space-evenly false
     (label :text date)
     (label :text time :class "pt-20")
     (label :text dow :class "pt-20")))
 
-(defwidget metric [name value ?disabled]
-  (box :class "box font-24 pa-20" :orientation "v" :space-evenly false
-    (label :class "pb-10" :text name)
-    (box :orientation "h" :space-evenly false
-      (scale :min 0 :max 100 :value value :class {disabled == 'true' ? 'disabled' : ''})
-      (label 
-        :class "pl-20"
-        :text {disabled == 'true' ? '-' : '${round(value, 0)}%'} ))))
+(defwidget metric [icon text value ?disabled]
+  (box :class "box pa-20" :orientation "v" :space-evenly false
+    (box :orientation "h" :space-evenly false :halign "start" :spacing 15 :class "pb-10"
+      (label :text icon :class "font-20")
+      (label :text text :class "font-20" :valign "end"))
+    (box :orientation "h" :space-evenly false :spacing 10
+      (scale :min 0 :max 100 :value value :class {disabled == 'true' ? 'disabled' : ''}))
+    (label :class "pt-10" :text {disabled == 'true' ? '-' : '${round(value, 0)}%'})))
 
-(defwidget graph_box [name value]
-  (box :orientation "v" :class "box" :space-evenly false
-    (label :class "font-24 pt-20 pb-10" :text "${name} ${round(value, 0)}%")
+(defwidget graph_box [icon text value]
+  (box :orientation "v" :class "box pa-20" :space-evenly false
+    (box :orientation "h" :space-evenly false :halign "start" :spacing 15 :class "pb-10"
+      (label :text icon :class "font-20")
+      (label :text "${text} ${round(value, 0)}%" :class "font-20" :valign "end"))
     (graph
       :height 50
       :value value
-      :max 25
+      :max 100
       :min 0
       :dynamic true
       :time-range "10s"
@@ -79,7 +81,7 @@
 
 (defwidget focus_mode []
   (box :class "box" :orientation "v"
-    (button :onclick "toggle_focus_mode" :class "font-24 ${focus_mode == "true" ? "selected" : ""}" "Focus mode")))
+    (button :onclick "toggle_focus_mode" :class "font-20 ${focus_mode == "true" ? "selected" : ""}" "Focus mode")))
 
 (defpoll crypto_btc_price :initial "-" :interval "1m" "crypto_price BTC")
 (defpoll crypto_eth_price :initial "-" :interval "1m" "crypto_price ETH")
@@ -94,7 +96,7 @@
 
 (defpoll date :interval "1s" "date '+%Y.%m.%d'")
 (defpoll time :interval "1s" "date '+%H:%M:%S'")
-(defpoll dow :interval "60s" "date '+%A (%V)'")
+(defpoll dow :interval "60s" "date '+%A'")
 
 (defpoll workspace_1_visible :interval "1s" "hyprctl monitors | grep -i 'active workspace: 1' | wc -l")
 (defpoll workspace_2_visible :interval "1s" "hyprctl monitors | grep -i 'active workspace: 2' | wc -l")
