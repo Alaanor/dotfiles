@@ -24,4 +24,4 @@ if [ "$DELAY" ]; then
 fi
 
 mkdir -p /home/max/media/screenshot/$month
-grimblast --freeze copysave area /home/max/media/screenshot/$month/$time.png
+hyprshot -m region -z -o /home/max/media/screenshot/$month -f $time.png

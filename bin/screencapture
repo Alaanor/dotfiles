@@ -1,13 +1,14 @@
 #!/bin/bash
 
-if pidof wl-screenrec
-then
+if pidof wl-screenrec > /dev/null; then
   kill -INT $(pidof wl-screenrec)
   notify-send 'Screen recording done'
-  dragon-drag-and-drop --and-exit $(ls -Artd ~/media/screencapture/* | tail -n 1)
+  dragon-drag-and-drop --and-exit "$(ls -Art ~/media/screencapture/*.mp4 | tail -n 1)"
 else
   time=$(date +%F-%T)
-  dim=$(hyprctl clients -j | jq -r ".[] | select(.workspace.id | IN($(hyprctl -j monitors | jq 'map(.activeWorkspace.id) | join(",")' | tr -d \")))" | jq -r ".at,.size" | jq -s "add" | jq '_nwise(4)' | jq -r '"\(.[0]),\(.[1]) \(.[2])x\(.[3])"'| slurp)
+  mkdir -p ~/media/screencapture
+  region=$(slurp)
+  [ -z "$region" ] && exit 1
   notify-send 'Screen recording starting'
-  wl-screenrec -g "$dim" -b "3 MB" --audio -f ~/media/screencapture/recording-$time.mp4
+  wl-screenrec -g "$region" -b "3 MB" --audio -f ~/media/screencapture/recording-$time.mp4
 fi
