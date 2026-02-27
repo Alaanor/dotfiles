@@ -1,6 +1,6 @@
-monitor=DP-3,1920x1080@60,0x0,1
-monitor=DP-1,2560x1440@240,1920x0,1
-monitor=HDMI-A-1,1920x1080x60,4480x0,1
+monitor=DP-3, 1920x1080@60, 0x0, 1
+monitor=DP-1, 2560x1440@240, 1920x0, 1
+monitor=HDMI-A-1, 1920x1080x60, 4480x0, 1
 
 env = XCURSOR_SIZE,24
 
@@ -8,7 +8,7 @@ input {
     kb_layout = ch
     kb_variant = fr
     kb_model =
-    kb_options = grp:alt_shift_toggle
+    kb_options = grp:caps_toggle
     kb_rules =
 
     follow_mouse = 0
@@ -48,10 +48,6 @@ dwindle {
     preserve_split = yes
 }
 
-gestures {
-    workspace_swipe = off
-}
-
 device {
     name=epic-mouse-v1
     sensitivity = -0.5
@@ -64,23 +60,29 @@ misc {
 # smart gaps
 workspace = w[tv1], gapsout:0, gapsin:0
 workspace = f[1], gapsout:0, gapsin:0
-windowrulev2 = bordersize 0, floating:0, onworkspace:w[tv1]
-windowrulev2 = rounding 0, floating:0, onworkspace:w[tv1]
-windowrulev2 = bordersize 0, floating:0, onworkspace:f[1]
-windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
+windowrule = border_size 0, match:float 0, match:workspace w[tv1]
+windowrule = rounding 0, match:float 0, match:workspace w[tv1]
+windowrule = border_size 0, match:float 0, match:workspace f[1]
+windowrule = rounding 0, match:float 0, match:workspace f[1]
 
-windowrulev2=nofocus,class:^jetbrains-(?!toolbox),floating:1,title:^win\d+$
+windowrule {
+  name = float-jetbrains-commit
+  match:class = jetbrains-rustrover
+  # match:title = Commit:
+  float = on
+}
 
 # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 $mainMod = SUPER
 
 # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-bind = $mainMod, return, exec, terminology
-bind = SUPER_SHIFT, Q, killactive 
+bind = $mainMod, return, exec, konsole
+bind = SUPER_SHIFT, Q, killactive
 bind = $mainMod, V, togglefloating
 bind = $mainMod, W, exec, ~/.config/eww/toggle_dashboard
 bind = $mainMod, D, exec, rofi -show drun
 bind = $mainMod, E, exec, rofimoji --action copy type --clipboarder wl-copy --max-recent=0
+bind = $mainMod, C, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy
 bind = $mainMod, P, pseudo
 bind = $mainMod, B, togglesplit
 
@@ -94,7 +96,7 @@ bind = SUPER_SHIFT, L, movewindow, r
 bind = SUPER_SHIFT, K, movewindow, u
 bind = SUPER_SHIFT, J, movewindow, d
 
-bind = SUPER_SHIFT, W, exec, wallpaper-daily-bing
+# bind = SUPER_SHIFT, W, exec, wallpaper-daily-bing
 
 # Switch workspaces with mainMod + [0-9]
 bind = $mainMod, 1, workspace, 1
@@ -153,8 +155,13 @@ workspace=name:7,monitor:DP-3
 workspace=name:8,monitor:DP-1
 workspace=name:9,monitor:HDMI-A-1
 
+exec-once=fcitx5
 exec-once=start-activity-watcher
 exec-once=eww daemon
 exec-once=hyprpaper
-exec-once=ibus-daemon -xrd
-exec-once=easyeffects -w
+exec-once=easyeffects --gapplication-service
+exec-once=wl-paste --watch cliphist store
+
+# hyprwhspr - Toggle mode (added by hyprwhspr setup)
+# Press once to start, press again to stop
+bindd = SUPER ALT, D, Speech-to-text, exec, /usr/lib/hyprwhspr/config/hyprland/hyprwhspr-tray.sh record

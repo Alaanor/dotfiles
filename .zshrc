@@ -1,3 +1,16 @@
+# pnpm
+export PNPM_HOME="/home/max/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+export PATH="$HOME/.local/bin:$PATH"
+
+if [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
+    return 0
+fi
+
 # Variable
 export ZSH="/home/max/.oh-my-zsh"
 export FZF_BASE=/usr/bin/fzf
@@ -31,4 +44,3 @@ eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
 autoload -U +X bashcompinit && bashcompinit
-

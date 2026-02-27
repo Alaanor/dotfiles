@@ -1,7 +1,8 @@
 " Base stuff
 set visualbell
 set noerrorbells
-set clipboard+=unnamed
+" set clipboard+=unnamed
+set clipboard+=unnamedplus
 set so=999
 set relativenumber
 set notimeout
