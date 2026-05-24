@@ -44,7 +44,6 @@ animations {
 }
 
 dwindle {
-    pseudotile = yes
     preserve_split = yes
 }
 
@@ -84,7 +83,6 @@ bind = $mainMod, D, exec, rofi -show drun
 bind = $mainMod, E, exec, rofimoji --action copy type --clipboarder wl-copy --max-recent=0
 bind = $mainMod, C, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy
 bind = $mainMod, P, pseudo
-bind = $mainMod, B, togglesplit
 
 bind = $mainMod, H, movefocus, l
 bind = $mainMod, L, movefocus, r
