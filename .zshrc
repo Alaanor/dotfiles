@@ -36,6 +36,30 @@ source /usr/share/nvm/init-nvm.sh
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
+# Key bindings
+bindkey -e
+
+# Home / End — bind normal, application-cursor, and vt variants so it works
+# regardless of the terminal's keypad mode (tmux, xterm, foot, alacritty, …)
+bindkey '^[[H'  beginning-of-line; bindkey '^[OH' beginning-of-line; bindkey '^[[1~' beginning-of-line
+bindkey '^[[F'  end-of-line;       bindkey '^[OF' end-of-line;       bindkey '^[[4~' end-of-line
+
+# Delete / Insert
+bindkey '^[[3~' delete-char
+bindkey '^[[2~' overwrite-mode
+
+# Word motion: Ctrl+Left/Right and Alt+Left/Right
+bindkey '^[[1;5C' forward-word; bindkey '^[[1;5D' backward-word
+bindkey '^[[1;3C' forward-word; bindkey '^[[1;3D' backward-word
+bindkey '^[Oc'    forward-word; bindkey '^[Od'    backward-word
+
+# Ctrl+Backspace / Ctrl+Delete — delete previous / next word
+bindkey '^H'      backward-kill-word
+bindkey '^[[3;5~' kill-word
+
+# Shift+Tab cycles completion backwards
+bindkey '^[[Z'    reverse-menu-complete
+
 # Aliases
 alias _='sudo'
 alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles.git/ --work-tree=$HOME'
