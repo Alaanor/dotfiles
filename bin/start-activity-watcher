@@ -1,2 +1,0 @@
-#!/bin/bash
-aw-server-rust & aw-watcher-afk & aw-watcher-window
