@@ -15,7 +15,6 @@
 !/.config/hypr/
 /.config/hypr/*
 !/.config/hypr/hyprland.lua
-!/.config/hypr/hyprland.desktop.lua
 !/.config/hypr/hyprpaper.conf
 !/.config/zlaunch/
 !/.config/dunst/
