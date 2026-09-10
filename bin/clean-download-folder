@@ -1,0 +1,11 @@
+#!/bin/bash
+
+current_date=$(date +%Y-%m)
+source_dir="$HOME/Downloads"
+dest_dir="$HOME/archive/download/$current_date"
+
+if [ ! -d "$dest_dir" ]; then
+    mkdir -p "$dest_dir"
+fi
+
+mv "$source_dir"/* "$dest_dir"/

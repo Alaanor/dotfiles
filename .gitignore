@@ -2,8 +2,6 @@
 !/.gitignore
 !/README.md
 !/docs/
-!/pkglist-repo.txt
-!/pkglist-aur.txt
 
 !/.zshrc
 !/.zshenv
@@ -29,5 +27,3 @@
 /bin/*
 !/bin/wallpaper-daily-bing
 !/bin/clean-download-folder
-!/bin/steam-play-volume-toggle
-!/bin/gamescope-apex

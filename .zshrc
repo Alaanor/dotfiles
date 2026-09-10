@@ -1,9 +1,9 @@
-# pnpm
 export PNPM_HOME="/home/max/.local/share/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
+
 export PATH="$HOME/.local/bin:$PATH"
 
 if [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
@@ -23,7 +23,7 @@ autoload -Uz compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 
 # tmux: ensure daily sessions exist, then attach
-if [ -z "$TMUX" ] && command -v tmux >/dev/null 2>&1; then
+if [ -z "$TMUX" ] && [[ "$TERM_PROGRAM" != "zed" ]] && command -v tmux >/dev/null 2>&1; then
   tmux start-server
   tmux has-session -t main           2>/dev/null || tmux new-session -d -s main
   tmux has-session -t kimchi-process 2>/dev/null || tmux new-session -d -s kimchi-process
@@ -65,6 +65,14 @@ alias _='sudo'
 alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles.git/ --work-tree=$HOME'
 alias dnd='dragon-drag-and-drop --and-exit'
 alias ssh='TERM=xterm-256color ssh'
+alias clanker='sudo -H -u clanker env XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR" WAYLAND_DISPLAY="$WAYLAND_DISPLAY" /home/clanker/.local/bin/claude'
 
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
+
+# bun completions
+[ -s "/home/max/.bun/_bun" ] && source "/home/max/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

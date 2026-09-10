@@ -1,0 +1,3 @@
+theme = "gruvbox-dark"
+enable_transparency = false
+hyprland_auto_blur = false
