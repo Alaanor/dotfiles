@@ -22,11 +22,13 @@ PanelWindow {
     property rect dragRect: Qt.rect(0, 0, 0, 0)
     property rect hoverRect: Qt.rect(0, 0, 0, 0)
 
+    readonly property list<var> handles: [[0, 0], [0.5, 0], [1, 0], [1, 0.5], [1, 1], [0.5, 1], [0, 1], [0, 0.5]]
+
     screen: modelData
     exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.namespace: "qs-screenshot"
-    WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
+    WlrLayershell.keyboardFocus: controller.top && (controller.phase !== "annotate" || isActive) ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.OnDemand
     color: "transparent"
     anchors { left: true; right: true; top: true; bottom: true }
 
@@ -200,17 +202,17 @@ PanelWindow {
             visible: shade.r.width > 0
 
             Repeater {
-                model: win.hasSel ? 4 : 0
+                model: win.hasSel ? win.handles : []
                 Rectangle {
-                    required property int index
+                    required property var modelData
                     width: 10
                     height: 10
                     radius: 5
                     color: Theme.accentA
                     border.width: 2
                     border.color: Theme.bg
-                    x: (index % 2 === 0 ? 0 : outline.width) - 5
-                    y: (index < 2 ? 0 : outline.height) - 5
+                    x: modelData[0] * outline.width - 5
+                    y: modelData[1] * outline.height - 5
                 }
             }
         }
@@ -249,7 +251,7 @@ PanelWindow {
             if (win.selecting && !win.dragging && !win.hasSel) win.hoverRect = win.windowAt(e.x, e.y);
             if (!win.dragging) return;
             if (win.selecting) {
-                win.dragRect = win.norm(win.dragStart, p);
+                win.dragRect = win.controller.snap(win.modelData, win.norm(win.dragStart, p));
                 return;
             }
             const d = win.draft;
@@ -311,6 +313,45 @@ PanelWindow {
             if (d === null) return;
             const tooSmall = (d.type === "rect" || d.type === "blur" || d.type === "box") && (d.w < 2 || d.h < 2);
             if (!tooSmall) c.push(d);
+        }
+    }
+
+    Repeater {
+        model: win.annotating ? win.handles : []
+
+        MouseArea {
+            required property var modelData
+            readonly property real ax: modelData[0]
+            readonly property real ay: modelData[1]
+            readonly property int corner: 24
+            readonly property int edge: 12
+            property rect origin
+            property point from
+
+            x: ax === 0.5 ? win.sel.x + corner / 2 : win.sel.x + ax * win.sel.width - (ay === 0.5 ? edge : corner) / 2
+            y: ay === 0.5 ? win.sel.y + corner / 2 : win.sel.y + ay * win.sel.height - (ax === 0.5 ? edge : corner) / 2
+            width: ax === 0.5 ? Math.max(0, win.sel.width - corner) : ay === 0.5 ? edge : corner
+            height: ay === 0.5 ? Math.max(0, win.sel.height - corner) : ax === 0.5 ? edge : corner
+            hoverEnabled: true
+            preventStealing: true
+            cursorShape: ax === 0.5 ? Qt.SizeVerCursor : ay === 0.5 ? Qt.SizeHorCursor : ax === ay ? Qt.SizeFDiagCursor : Qt.SizeBDiagCursor
+
+            onPressed: e => {
+                textEdit.commit();
+                keys.forceActiveFocus();
+                origin = win.sel;
+                from = mapToItem(null, e.x, e.y);
+            }
+
+            onPositionChanged: e => {
+                if (!pressed) return;
+                const p = mapToItem(null, e.x, e.y);
+                const dx = p.x - from.x, dy = p.y - from.y;
+                let x1 = origin.x, y1 = origin.y, x2 = origin.x + origin.width, y2 = origin.y + origin.height;
+                if (ax === 0) x1 += dx; else if (ax === 1) x2 += dx;
+                if (ay === 0) y1 += dy; else if (ay === 1) y2 += dy;
+                win.controller.resize(win.norm(Qt.point(x1, y1), Qt.point(x2, y2)));
+            }
         }
     }
 
@@ -386,19 +427,6 @@ PanelWindow {
         id: keys
         anchors.fill: parent
         focus: true
-        Keys.onPressed: e => {
-            const c = win.controller;
-            if (e.key === Qt.Key_Escape) { c.cancel(); e.accepted = true; return; }
-            if (!win.isActive) return;
-            if (e.key === Qt.Key_Return || e.key === Qt.Key_Enter) { win.capture(); e.accepted = true; return; }
-            if (e.modifiers & Qt.ControlModifier) {
-                if (e.key === Qt.Key_Z) c.undo();
-                else if (e.key === Qt.Key_C) win.capture();
-                e.accepted = true;
-                return;
-            }
-            const t = c.tools.find(t => t.key === e.text.toLowerCase());
-            if (t !== undefined) c.tool = t.id;
-        }
+        Keys.onPressed: e => e.accepted = win.controller.shot.handleKey(e.key, e.modifiers, e.text)
     }
 }

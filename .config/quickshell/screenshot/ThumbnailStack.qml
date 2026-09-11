@@ -9,7 +9,7 @@ PanelWindow {
 
     readonly property list<var> thumbs: controller.thumbs.filter(t => t.screen === modelData.name)
 
-    visible: controller.phase === "idle" && thumbs.length > 0
+    visible: !controller.busy && thumbs.length > 0
     screen: modelData
     exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: WlrLayer.Overlay
