@@ -201,14 +201,56 @@ Scope {
                         }
                     }
 
-                    PromptLine { cmd: "hyprctl"; args: "workspaces" }
-
                     Row {
-                        leftPadding: 20
-                        spacing: 30
-                        WsGroup { name: "dp-1"; ids: [1, 4, 7] }
-                        WsGroup { name: "dp-3"; ids: [2, 5, 8] }
-                        WsGroup { name: "hdmi"; ids: [3, 6, 9] }
+                        width: parent.width
+                        spacing: 44
+                        topPadding: 16
+
+                        Column {
+                            width: 420
+                            spacing: 11
+
+                            PromptLine { cmd: "hyprctl"; args: "workspaces" }
+
+                            Row {
+                                leftPadding: 20
+                                spacing: 30
+                                WsGroup { name: "dp-1"; ids: [1, 4, 7] }
+                                WsGroup { name: "dp-3"; ids: [2, 5, 8] }
+                                WsGroup { name: "hdmi"; ids: [3, 6, 9] }
+                            }
+                        }
+
+                        Column {
+                            width: parent.width - 420 - 44
+                            spacing: 11
+
+                            PromptLine { cmd: "rsync"; args: "--status" }
+
+                            Item {
+                                x: 20
+                                width: parent.width - 20
+                                height: vaultLabel.height
+
+                                Text {
+                                    id: vaultLabel
+                                    textFormat: Text.RichText
+                                    text: `<font color="${VaultSync.tint}">●</font> vault`
+                                    color: Theme.dim
+                                    font.family: Theme.font
+                                    font.pixelSize: 14
+                                }
+
+                                Text {
+                                    anchors.right: parent.right
+                                    textFormat: Text.RichText
+                                    text: `<font color="${Theme.dim}">${VaultSync.summary}  ·  ${VaultSync.filesText}</font>  <b>${VaultSync.sizeText}</b>`
+                                    color: Theme.fg
+                                    font.family: Theme.font
+                                    font.pixelSize: 14
+                                }
+                            }
+                        }
                     }
                 }
             }

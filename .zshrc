@@ -66,6 +66,7 @@ alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles.git/ --work-tree=$HOME'
 alias dnd='dragon-drag-and-drop --and-exit'
 alias ssh='TERM=xterm-256color ssh'
 alias clanker='sudo -H -u clanker env XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR" WAYLAND_DISPLAY="$WAYLAND_DISPLAY" /home/clanker/.local/bin/claude'
+alias clanker-codex='sudo -H -u clanker env XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR" WAYLAND_DISPLAY="$WAYLAND_DISPLAY" /home/clanker/.local/bin/codex'
 
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
