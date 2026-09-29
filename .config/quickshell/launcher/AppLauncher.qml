@@ -50,6 +50,16 @@ Scope {
             if (best <= 0) continue;
             rows.push({ kind: "app", entry, name: entry.name, detail, running, positions: byName?.positions ?? [], score: best + boost(entry.id) });
         }
+        if (q !== "") {
+            for (const entry of list) {
+                for (const action of entry.actions) {
+                    const name = `${entry.name}: ${action.name}`;
+                    const m = Fuzzy.match(q, name, true);
+                    if (m !== null && m.score > 0)
+                        rows.push({ kind: "action", entry, action, name, detail: "", running: false, positions: m.positions, score: m.score * 0.9 + boost(entry.id) });
+                }
+            }
+        }
         rows.sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
         if (q !== "") rows.push({ kind: "shell", command: q });
         return rows;
@@ -60,7 +70,7 @@ Scope {
         list.positionViewAtIndex(sel, ListView.Contain);
     }
 
-    function launch(r: var, fresh: bool) {
+    function launch(r: var, switchTo: bool) {
         if (!r) return;
         overlay.open = false;
         if (r.kind === "shell") {
@@ -68,10 +78,16 @@ Scope {
             return;
         }
         usage.bump(r.entry.id);
-        const win = fresh ? null : windowFor(r.entry);
-        if (win !== null)
+        if (r.kind === "action") {
+            r.action.execute();
+            return;
+        }
+        const win = windowFor(r.entry);
+        if (switchTo && win !== null) {
             win.activate();
-        else if (r.entry.runInTerminal)
+            return;
+        }
+        if (r.entry.runInTerminal)
             Quickshell.execDetached([terminal, "-e", ...r.entry.command]);
         else
             r.entry.execute();

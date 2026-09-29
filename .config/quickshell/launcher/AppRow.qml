@@ -109,7 +109,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.rightMargin: 14
         anchors.verticalCenter: parent.verticalCenter
-        text: root.running ? (root.selected ? "switch ⏎" : "●") : root.selected ? "⏎" : !root.shell && root.modelData.entry.runInTerminal ? "tty" : ""
+        text: root.running ? (root.selected ? "new ⏎  switch ⇧⏎" : "●") : root.selected ? "⏎" : !root.shell && root.modelData.entry.runInTerminal ? "tty" : ""
         color: root.running ? Theme.green : Theme.dim
         font.family: Theme.font
         font.pixelSize: 13
