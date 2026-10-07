@@ -19,6 +19,7 @@ SAVEHIST=50000
 setopt share_history hist_ignore_dups hist_ignore_space hist_expire_dups_first inc_append_history autocd
 
 # Completion
+setopt glob_complete
 autoload -Uz compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 
@@ -65,8 +66,8 @@ alias _='sudo'
 alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles.git/ --work-tree=$HOME'
 alias dnd='dragon-drag-and-drop --and-exit'
 alias ssh='TERM=xterm-256color ssh'
-alias clanker='sudo -H -u clanker env XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR" WAYLAND_DISPLAY="$WAYLAND_DISPLAY" /home/clanker/.local/bin/claude'
-alias clanker-codex='sudo -H -u clanker env XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR" WAYLAND_DISPLAY="$WAYLAND_DISPLAY" /home/clanker/.local/bin/codex'
+alias clanker='setfacl -m u:clanker:x "$XDG_RUNTIME_DIR" && sudo -H -u clanker env XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR" WAYLAND_DISPLAY="$WAYLAND_DISPLAY" /home/clanker/.local/bin/claude'
+alias clanker-codex='setfacl -m u:clanker:x "$XDG_RUNTIME_DIR" && sudo -H -u clanker env XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR" WAYLAND_DISPLAY="$WAYLAND_DISPLAY" /home/clanker/.local/bin/codex'
 
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
