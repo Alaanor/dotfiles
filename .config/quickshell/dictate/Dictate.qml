@@ -14,9 +14,15 @@ Scope {
     property int seconds: 0
     property var screen: Quickshell.screens[0]
     readonly property var focusedMonitor: Hyprland.focusedMonitor
+    property Socket sock: null
+
+    function reconnect(): void {
+        sock?.destroy();
+        sock = sockComponent.createObject(root);
+    }
 
     function send(cmd: string): void {
-        if (!sock.connected) {
+        if (sock === null || !sock.connected) {
             flash("offline", "dictation daemon offline", 1500);
             return;
         }
@@ -57,18 +63,22 @@ Scope {
         }
     }
 
-    Socket {
-        id: sock
-        path: `${Quickshell.env("XDG_RUNTIME_DIR")}/dictate.sock`
-        connected: true
-        parser: SplitParser { onRead: line => root.onLine(line) }
+    Component {
+        id: sockComponent
+        Socket {
+            path: `${Quickshell.env("XDG_RUNTIME_DIR")}/dictate.sock`
+            connected: true
+            parser: SplitParser { onRead: line => root.onLine(line) }
+        }
     }
+
+    Component.onCompleted: reconnect()
 
     Timer {
         interval: 2000
         repeat: true
-        running: !sock.connected
-        onTriggered: sock.connected = true
+        running: root.sock === null || !root.sock.connected
+        onTriggered: root.reconnect()
     }
 
     Timer {
