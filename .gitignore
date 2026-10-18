@@ -10,6 +10,7 @@
 !/.config/
 /.config/*
 !/.config/quickshell/
+/.config/quickshell/dictate/phrases.txt
 !/.config/hypr/
 /.config/hypr/*
 !/.config/hypr/hyprland.lua
@@ -21,6 +22,11 @@
 !/.config/starship.toml
 !/.config/alacritty/
 !/.config/rofi/
+!/.config/systemd/
+/.config/systemd/*
+!/.config/systemd/user/
+/.config/systemd/user/*
+!/.config/systemd/user/dictate.service
 
 !/bin/
 /bin/*

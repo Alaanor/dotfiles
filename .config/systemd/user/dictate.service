@@ -1,0 +1,14 @@
+[Unit]
+Description=Parakeet push-to-talk dictation daemon
+PartOf=graphical-session.target
+After=graphical-session.target pipewire.service
+
+[Service]
+ExecStart=%h/.local/share/dictate/venv/bin/python %h/.config/quickshell/dictate/daemon.py
+Environment=PYTHONUNBUFFERED=1
+Restart=on-failure
+RestartSec=2
+Nice=5
+
+[Install]
+WantedBy=graphical-session.target

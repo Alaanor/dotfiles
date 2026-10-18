@@ -92,7 +92,8 @@ hl.bind("ALT + 2", hl.dsp.exec_cmd("qs ipc call screenshot delayed 3"))
 hl.bind("ALT + 3", hl.dsp.exec_cmd("qs ipc call screenshot record"))
 hl.bind("ALT + 4", hl.dsp.exec_cmd("~/bin/ocr"))
 
-hl.bind(mainMod .. " + ALT + D", hl.dsp.exec_cmd("/usr/lib/hyprwhspr/config/hyprland/hyprwhspr-tray.sh record"), { description = "Speech-to-text" })
+hl.bind(mainMod .. " + ALT + D", hl.dsp.exec_cmd("qs ipc call dictate start"), { description = "Dictation (hold)" })
+hl.bind(mainMod .. " + ALT + D", hl.dsp.exec_cmd("qs ipc call dictate stop"), { release = true })
 
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
