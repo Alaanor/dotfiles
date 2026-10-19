@@ -53,8 +53,10 @@ Scope {
             phase = "busy";
         } else if (kind === "text") {
             const text = JSON.parse(arg);
-            Quickshell.execDetached(["wl-copy", "--", text]);
-            Quickshell.execDetached(["sh", "-c", 'printf %s "$1" | wtype -', "sh", text]);
+            const appId = ToplevelManager.activeToplevel?.appId ?? "";
+            const terminal = /konsole|kitty|foot|alacritty|ghostty|wezterm|terminal/i.test(appId);
+            const paste = terminal ? "wtype -M ctrl -M shift v -m shift -m ctrl" : "wtype -M ctrl v -m ctrl";
+            Quickshell.execDetached(["sh", "-c", `wl-copy -- "$1" && sleep 0.05 && ${paste}`, "sh", text]);
             flash("done", text, 1500);
         } else if (kind === "empty") {
             flash("empty", "nothing heard", 900);
